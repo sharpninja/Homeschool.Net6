@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>6279c845-92f8-4333-ab99-3d213163593c</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Homeschool.App</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ActivityFeedLayout.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\BooleanToValueConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Category.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ColorSlideTransitionHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\DeviceFamilyTrigger.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\DoubleToThicknessConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ImageLoader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\LanguageList.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\MenuItemTemplateSelector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\NullableBooleanToBooleanConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\NullToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\OrientedSize.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\VariedImageSizeLayout.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\WrapPanel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CompactSizePage.xaml.cs">
+      <DependentUpon>CompactSizePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\BrowserViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\IBrowserControlPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Data\ControlInfoDataSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GlobalUsings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\NavigationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\NavigationOrientationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\ProtocolActivationClipboardHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\ThemeHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\UIHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemPage.xaml.cs">
+      <DependentUpon>ItemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)ItemsPageBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ItemTemplates.xaml.cs">
+      <DependentUpon>ItemTemplates.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SearchResultsPage.xaml.cs">
+      <DependentUpon>SearchResultsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SectionPage.xaml.cs">
+      <DependentUpon>SectionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ResearchPage.xaml.cs">
+      <DependentUpon>ResearchPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)CompactSizePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\BrowserControlWebView.xaml.cs" Condition=" '$(UseWebView)'=='true' ">
+      <DependentUpon>BrowserControlWebView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\BrowserControlWebView2.xaml.cs" Condition=" '$(UseWebView2)'=='true' ">
+      <DependentUpon>BrowserControlWebView2.xaml</DependentUpon>
+    </Compile>
+    <None Include="$(MSBuildThisFileDirectory)Controls\BrowserControlWebView.xaml" Condition=" '$(UseWebView)'=='true' ">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Controls\BrowserControlWebView2.xaml" Condition=" '$(UseWebView2)'=='true' ">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <Page Include="$(MSBuildThisFileDirectory)ItemPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ItemTemplates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SearchResultsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SectionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Views\ResearchPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Assets\SharedAssets.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <!--
+		 Add files present in the shared project folder, excluding the ones
+		 explicitly included in the projitem, so files can be added from vscode
+		 without manipulating the projitem file.
+	-->
+    <_Globbled_Page Include="$(MSBuildThisFileDirectory)**/*.xaml" Exclude="@(Page);@(ApplicationDefinition)">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </_Globbled_Page>
+    <_Globbed_Compile Include="$(MSBuildThisFileDirectory)**/*.xaml.cs" Exclude="@(Compile)">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </_Globbed_Compile>
+    <_Globbed_Compile Include="$(MSBuildThisFileDirectory)**/*.cs" Exclude="@(Compile);@(_Globbed_Compile)" />
+    <_Globbed_PRIResource Include="$(MSBuildThisFileDirectory)**/*.resw" Exclude="@(PRIResource)" />
+    <PRIResource Include="@(_Globbed_PRIResource)" />
+    <_Globbed_Content Include="$(MSBuildThisFileDirectory)Assets/**/*.*" Exclude="@(Content)" />
+    <Content Include="@(_Globbed_Content)" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Behaviors\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Converters\" />
+    <Folder Include="$(MSBuildThisFileDirectory)ViewModels\" />
+  </ItemGroup>
+</Project>

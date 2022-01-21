@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Exe": {
+      "commandName": "Executable",
+      "executablePath": "C:\\GitHub\\Homeschool.Net6\\Homeschool.Net6.Windows.Package\\bin\\x64\\Debug\\AppX\\Homeschool.Net6.Windows.Desktop\\Homeschool.Net6.Windows.Desktop.exe\"",
+      "workingDirectory": "C:\\Windows\\System32\\",
+      "jsWebView2Debugging": true
+    }
+  }
+}

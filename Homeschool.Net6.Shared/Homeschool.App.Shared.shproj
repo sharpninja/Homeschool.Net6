@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B535D869-4B6D-4923-B024-294ACF695F7D}</ProjectGuid>
+    <MinimumVisualStudioVersion>14.0</MinimumVisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.Common.Default.props" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.Common.props" />
+  <PropertyGroup />
+  <Import Project="Homeschool.App.Shared.projitems" Label="Shared" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\CodeSharing\Microsoft.CodeSharing.CSharp.targets" />
+  <ItemGroup>
+    <_Globbed_Compile Remove="AllControlsPage.xaml.cs" />
+    <_Globbed_Compile Remove="Behaviors\ImageScrollBehavior.cs" />
+    <_Globbed_Compile Remove="BlankWindow1.xaml.cs" />
+    <_Globbed_Compile Remove="Common\NavigationHelper.cs" />
+    <_Globbed_Compile Remove="CompactSizePage.xaml.cs" />
+    <_Globbed_Compile Remove="Controls\BrowserControl2.xaml.cs" />
+    <_Globbed_Compile Remove="Controls\BrowserControl.xaml.cs" />
+    <_Globbed_Compile Remove="Controls\BrowserControlWebViewWpf.xaml.cs" />
+    <_Globbed_Compile Remove="Controls\BrowserViewModel.cs" />
+    <_Globbed_Compile Remove="Controls\IBrowserControlPage.cs" />
+    <_Globbed_Compile Remove="Controls\MobileBrowserControlWebView.xaml.cs" />
+    <_Globbed_Compile Remove="Controls\WebViewContainer.xaml.cs" />
+    <_Globbed_Compile Remove="Converters\NullToVisibilityConverter.cs" />
+    <_Globbed_Compile Remove="Data\ControlInfoDataSource.cs" />
+    <_Globbed_Compile Remove="GlobalUsings.cs" />
+    <_Globbed_Compile Remove="Helper\NavigationHelper.cs" />
+    <_Globbed_Compile Remove="Helper\NavigationOrientationHelper.cs" />
+    <_Globbed_Compile Remove="Helper\ProtocolActivationClipboardHelper.cs" />
+    <_Globbed_Compile Remove="Helper\ThemeHelper.cs" />
+    <_Globbed_Compile Remove="Helper\UIHelper.cs" />
+    <_Globbed_Compile Remove="ItemPage.xaml.cs" />
+    <_Globbed_Compile Remove="ItemsPageBase.cs" />
+    <_Globbed_Compile Remove="ItemTemplates.xaml.cs" />
+    <_Globbed_Compile Remove="Navigation\NavigationRootPage.xaml.cs" />
+    <_Globbed_Compile Remove="NewControlsPage.xaml.cs" />
+    <_Globbed_Compile Remove="PageHeader.xaml.cs" />
+    <_Globbed_Compile Remove="SearchResultsPage.xaml.cs" />
+    <_Globbed_Compile Remove="SectionPage.xaml.cs" />
+    <_Globbed_Compile Remove="SettingsPage.xaml.cs" />
+    <_Globbed_Compile Remove="Views\ResearchPage.xaml.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <_Globbled_Page Remove="AllControlsPage.xaml" />
+    <_Globbled_Page Remove="CompactSizePage.xaml" />
+    <_Globbled_Page Remove="Controls\BrowserControlWebViewWpf.xaml" />
+    <_Globbled_Page Remove="Controls\MobileBrowserControlWebView.xaml" />
+    <_Globbled_Page Remove="Controls\WebViewContainer.xaml" />
+    <_Globbled_Page Remove="ItemPage.xaml" />
+    <_Globbled_Page Remove="ItemTemplates.xaml" />
+    <_Globbled_Page Remove="Navigation\NavigationRootPage.xaml" />
+    <_Globbled_Page Remove="NewControlsPage.xaml" />
+    <_Globbled_Page Remove="PageHeader.xaml" />
+    <_Globbled_Page Remove="SearchResultsPage.xaml" />
+    <_Globbled_Page Remove="SectionPage.xaml" />
+    <_Globbled_Page Remove="SettingsPage.xaml" />
+    <_Globbled_Page Remove="Views\ResearchPage.xaml" />
+  </ItemGroup>
+</Project>
