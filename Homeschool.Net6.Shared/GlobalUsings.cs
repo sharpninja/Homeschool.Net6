@@ -4,7 +4,7 @@ global using System.Linq;
 global using System.Text;
 global using System.Threading.Tasks;
 
-global using Windows.UI.Xaml.Markup;
+//global using Windows.UI.Xaml.Markup;
 global using Microsoft.UI.Xaml;
 global using Microsoft.UI.Xaml.Controls;
 global using Microsoft.UI.Xaml.Markup;

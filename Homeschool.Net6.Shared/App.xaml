@@ -2,7 +2,7 @@
     x:Class="Homeschool.App.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:winui="using:Microsoft.UI.Xaml.Controls" 
+    xmlns:winui="using:Microsoft.UI.Xaml.Controls"
     xmlns:local="using:Homeschool.App"
     xmlns:common="using:Homeschool.App.Common"
     >
@@ -47,11 +47,11 @@
             </LinearGradientBrush>
 
             <!--  Application-specific resources  -->
-            <common:NullableBooleanToBooleanConverter x:Key="nullableBooleanToBooleanConverter" />
+            <!--<common:NullableBooleanToBooleanConverter x:Key="nullableBooleanToBooleanConverter" />
             <common:NullToVisibilityConverter x:Key="nullToVisibilityConverter" />
             <common:NullToVisibilityConverter x:Key="inverseNullToVisibilityConverter" NonNullValue="Collapsed" NullValue="Visible" />
             <common:BooleanToValueConverter x:Key="booleanToValueConverter" />
-            <common:DoubleToThicknessConverter x:Key="doubleToThicknessConverter" />
+            <common:DoubleToThicknessConverter x:Key="doubleToThicknessConverter" />-->
 
             <!--  Breakpoints  -->
             <x:Double x:Key="Breakpoint640Plus">641</x:Double>

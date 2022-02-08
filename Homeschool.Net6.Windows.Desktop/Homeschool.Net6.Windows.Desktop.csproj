@@ -21,6 +21,7 @@
 		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
 		<DefaultLanguage>en-US</DefaultLanguage>
 		<DefineConstants>__WINUI_3__</DefineConstants>
+		<LangVersion>10.0</LangVersion>
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="Assets\LockScreenLogo.scale-200.png" />
@@ -103,11 +104,11 @@
 		<PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
 		<PackageReference Include="Microsoft.Windows.CsWinRT" Version="1.4.1" />
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.196" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.8" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
-		<PackageReference Include="Uno.WinUI" Version="4.0.11" />
+		<PackageReference Include="Uno.WinUI" Version="4.0.13" />
 	</ItemGroup>
 
 	<ItemGroup>

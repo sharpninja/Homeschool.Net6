@@ -4,8 +4,6 @@
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Core;
 
-using Common;
-
 using Views;
 using LaunchActivatedEventArgs = Microsoft.UI.Xaml.LaunchActivatedEventArgs;
 
@@ -128,9 +126,6 @@ public sealed partial class App    : Application
         // We'll never need to do this again.
         //await ControlInfoDataSource.Instance.GetGroupsAsync();
 
-        MainWindow m_window = new MainWindow();
-        m_window.Activate();
-
         Frame rootFrame = GetRootFrame();
 
         //ThemeHelper.Initialize();
@@ -162,7 +157,7 @@ public sealed partial class App    : Application
                 return null;
             }
 
-            SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
+            //SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
             rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
             rootFrame.NavigationFailed += OnNavigationFailed;
 
