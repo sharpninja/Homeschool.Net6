@@ -25,11 +25,11 @@ public class BrowserViewModel : ObservableObject
 
     public RelayCommand<string> Go => _go ??= new(s =>
     {
-        string address = s ?? "";
+        var address = s ?? "";
 
         Forward.Clear();
 
-        string? url = address.Split(':').First().ToLower() switch
+        var url = address.Split(':').First().ToLower() switch
         {
             "http" or "https" => s,
             _ => $"https://bing.com/search/?q={s}",
@@ -40,7 +40,7 @@ public class BrowserViewModel : ObservableObject
 
     public RelayCommand GoBack => _goBack ??= new(() =>
     {
-        if (!History.TryPop(out Uri? url))
+        if (!History.TryPop(out var url))
         {
             return;
         }
@@ -51,7 +51,7 @@ public class BrowserViewModel : ObservableObject
 
     public RelayCommand GoForward => _goForward ??= new(() =>
     {
-        if (!Forward.TryPop(out Uri? url))
+        if (!Forward.TryPop(out var url))
         {
             return;
         }

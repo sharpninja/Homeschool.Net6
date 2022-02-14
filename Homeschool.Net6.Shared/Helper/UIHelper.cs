@@ -17,24 +17,25 @@ public static class UiHelper
     public static IEnumerable<DependencyObject> GetDescendants(this DependencyObject start)
     {
         var queue = new Queue<DependencyObject>();
-        int count1 = VisualTreeHelper.GetChildrenCount(start);
+        var count1 = VisualTreeHelper.GetChildrenCount(start);
 
-        for (int i = 0; i < count1; i++)
+        for (var i = 0; i < count1; i++)
         {
-            DependencyObject child = VisualTreeHelper.GetChild(start, i);
+            var child = VisualTreeHelper.GetChild(start, i);
             yield return child;
             queue.Enqueue(child);
         }
 
         while (queue.Count > 0)
         {
-            DependencyObject parent = queue.Dequeue();
-            int count2 = VisualTreeHelper.GetChildrenCount(parent);
+            var parent = queue.Dequeue();
+            var count2 = VisualTreeHelper.GetChildrenCount(parent);
 
-            for (int i = 0; i < count2; i++)
+            for (var i = 0; i < count2; i++)
             {
-                DependencyObject child = VisualTreeHelper.GetChild(parent, i);
+                var child = VisualTreeHelper.GetChild(parent, i);
                 yield return child;
+
                 queue.Enqueue(child);
             }
         }

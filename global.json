@@ -1,8 +1,8 @@
 {
-    "sdk": {
-        "allowPrerelease": true,
-        //"version": "6.0.100-preview.6.21355.2"
-        "version": "6.0.200-preview.22055.15"
-        //"rollForward": "latestPatch"
-    }
+  "sdk": {
+    "allowPrerelease": true,
+    //"version": "6.0.100-preview.6.21355.2"
+    "version": "6.0.200-preview.22055.15"
+    //"rollForward": "latestPatch"
+  }
 }

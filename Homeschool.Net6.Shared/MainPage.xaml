@@ -1,13 +1,44 @@
-﻿<Page
-    x:Class="Homeschool.App.MainPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Homeschool.App"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <NavigationView x:Name="Nav">
+﻿<Page x:Class="Homeschool.App.MainPage" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:local="using:Homeschool.App"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d"
+        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <Style TargetType="NavigationView">
+            <Setter Property="Background" Value="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}" />
+            <Setter Property="Padding" Value="0" />
+        </Style>
+    </Page.Resources>
+    <NavigationView x:Name="NavView"
+                    x:FieldModifier="internal"
+                    IsSettingsVisible="True"
+                    IsBackButtonVisible="Auto"
+                    IsBackEnabled="False"
+                    AlwaysShowHeader="False"
+                    PaneTitle="Activities"
+                    PaneDisplayMode="LeftCompact"
+                    ExpandedModeThresholdWidth="500"
+                    SelectionFollowsFocus="Disabled"
+                    ItemInvoked="NavItem_Invoked"
+                    >
+        <NavigationView.MenuItems>
+            <NavigationViewItem Content="Home" Tag="HomePage">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xEA8A;" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem Content="Study.com" Tag="Studydotcom">
+                <NavigationViewItem.Icon>
+                    <ImageIcon Source="Assets/studycom.png" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+            <NavigationViewItem Content="Reasearch" Tag="ResearchPage">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xF6FA;" />
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+        </NavigationView.MenuItems>
+        <Frame x:Name="RootPane" x:FieldModifier="public" Navigated="Frame_Navigated" />
 
     </NavigationView>
 </Page>

@@ -2,13 +2,10 @@
   "solution": {
     "path": "Homeschool.Net6.sln",
     "projects": [
-		"Homeschool.Net6.Shared\\Homeschool.Net6.Shared.shproj",
-
-		"Homeschool.Net6.Mobile\\Homeschool.Net6.Mobile.csproj",
-
-		"Homeschool.Net6.Wasm\\Homeschool.Net6.Wasm.csproj",
-
-		"Homeschool.Net6.Skia.Gtk\\Homeschool.Net6.Skia.Gtk.csproj",
+      "Homeschool.Net6.Shared\\Homeschool.Net6.Shared.shproj",
+      "Homeschool.Net6.Mobile\\Homeschool.Net6.Mobile.csproj",
+      "Homeschool.Net6.Wasm\\Homeschool.Net6.Wasm.csproj",
+      "Homeschool.Net6.Skia.Gtk\\Homeschool.Net6.Skia.Gtk.csproj"
     ]
   }
 }

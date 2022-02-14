@@ -1,8 +1,9 @@
 {
   "profiles": {
     "AppSdkLauncher (Package)": {
-        "commandName": "MsixPackage",
-        "jsWebView2Debugging": true
+      "commandName": "MsixPackage",
+      "jsWebView2Debugging": true,
+      "nativeDebugging": true
     },
     "AppSdkLauncher (Unpackaged)": {
       "commandName": "Project",

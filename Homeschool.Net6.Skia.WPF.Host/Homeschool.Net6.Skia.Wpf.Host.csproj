@@ -1,24 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <OutputType Condition="'$(Configuration)'=='Release'">WinExe</OutputType>
-    <OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
-    <TargetFramework>net6.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
-    <Platforms>AnyCPU;x64</Platforms>
-    <LangVersion>10.0</LangVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="7.1.2" />
-    <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39" />
-    <PackageReference Include="Uno.WinUI.Skia.Wpf" Version="4.0.13" />
-    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.0.13" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.0.13" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Assets\Fonts\uno-fluentui-assets.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Homeschool.Net6.Skia.WPF\Homeschool.Net6.Skia.WPF.csproj" />
-  </ItemGroup>
+    <PropertyGroup>
+        <OutputType Condition="'$(Configuration)'=='Release'">WinExe</OutputType>
+        <OutputType Condition="'$(Configuration)'=='Debug'">Exe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <UseWPF>true</UseWPF>
+        <Platforms>AnyCPU;x64</Platforms>
+        <LangVersion>10.0</LangVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="7.1.2"/>
+        <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2"/>
+        <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.39"/>
+        <PackageReference Include="Uno.WinUI.Skia.Wpf" Version="4.0.13"/>
+        <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.0.13" Condition="'$(Configuration)'=='Debug'"/>
+        <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.0.13"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="Assets\Fonts\uno-fluentui-assets.ttf"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Homeschool.Net6.Skia.WPF\Homeschool.Net6.Skia.WPF.csproj"/>
+    </ItemGroup>
 </Project>

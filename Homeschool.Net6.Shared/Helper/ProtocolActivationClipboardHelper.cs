@@ -19,7 +19,7 @@ public static class ProtocolActivationClipboardHelper
     {
         get
         {
-            object valueFromSettings = ApplicationData.Current.LocalSettings.Values[ProtocolActivationClipboardHelper.SHOW_COPY_LINK_TEACHING_TIP_KEY];
+            var valueFromSettings = ApplicationData.Current.LocalSettings.Values[ProtocolActivationClipboardHelper.SHOW_COPY_LINK_TEACHING_TIP_KEY];
             if (valueFromSettings == null)
             {
                 ApplicationData.Current.LocalSettings.Values[ProtocolActivationClipboardHelper.SHOW_COPY_LINK_TEACHING_TIP_KEY] = true;
@@ -45,7 +45,7 @@ public static class ProtocolActivationClipboardHelper
 
     private static void Copy(Uri uri, string displayName)
     {
-        string htmlFormat = HtmlFormatHelper.CreateHtmlFormat($"<a href='{uri}'>{displayName}</a>");
+        var htmlFormat = HtmlFormatHelper.CreateHtmlFormat($"<a href='{uri}'>{displayName}</a>");
 
         DataPackage dataPackage = new();
         dataPackage.SetApplicationLink(uri);

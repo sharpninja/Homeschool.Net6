@@ -6,7 +6,6 @@ namespace Homeschool.App.Helper;
 
 
 using Windows.Storage;
-using Windows.UI;
 using Windows.UI.ViewManagement;
 
 using Microsoft.UI;
@@ -17,28 +16,10 @@ using Microsoft.UI;
 public static class ThemeHelper
 {
     private const string SELECTED_APP_THEME_KEY = "SelectedAppTheme";
-    private static Window _currentApplicationWindow;
+    public static Window _currentApplicationWindow;
     // Keep reference so it does not get optimized/garbage collected
-    private static UISettings _uiSettings;
-    /// <summary>
-    /// Gets the current actual theme of the app based on the requested theme of the
-    /// root element, or if that value is Default, the requested theme of the Application.
-    /// </summary>
-    public static ElementTheme ActualTheme
-    {
-        get
-        {
-            if (Window.Current.Content is FrameworkElement rootElement)
-            {
-                if (rootElement.RequestedTheme != ElementTheme.Default)
-                {
-                    return rootElement.RequestedTheme;
-                }
-            }
+    public static UISettings _uiSettings;
 
-            return App.GetEnum<ElementTheme>(Application.Current.RequestedTheme.ToString());
-        }
-    }
 
     /// <summary>
     /// Gets or sets (with LocalSettings persistence) the RequestedTheme of the root element.
@@ -68,18 +49,18 @@ public static class ThemeHelper
 
     public static void Initialize()
     {
-        // Save reference as this might be null when the user is in another app
-        ThemeHelper._currentApplicationWindow = Window.Current;
-        string savedTheme = ApplicationData.Current.LocalSettings.Values[ThemeHelper.SELECTED_APP_THEME_KEY]?.ToString();
+        //// Save reference as this might be null when the user is in another app
+        //ThemeHelper.CurrentApplicationWindow = Window.Current;
+        //string savedTheme = ApplicationData.Current.LocalSettings.Values[ThemeHelper.SELECTED_APP_THEME_KEY]?.ToString();
 
-        if (savedTheme != null)
-        {
-            ThemeHelper.RootTheme = App.GetEnum<ElementTheme>(savedTheme);
-        }
+        //if (savedTheme != null)
+        //{
+        //    ThemeHelper.RootTheme = App.GetEnum<ElementTheme>(savedTheme);
+        //}
 
-        // Registering to color changes, thus we notice when user changes theme system wide
-        ThemeHelper._uiSettings = new();
-        ThemeHelper._uiSettings.ColorValuesChanged += ThemeHelper.UiSettings_ColorValuesChanged;
+        //// Registering to color changes, thus we notice when user changes theme system wide
+        //ThemeHelper.UiSettings = new();
+        //ThemeHelper.UiSettings.ColorValuesChanged += ThemeHelper.UiSettings_ColorValuesChanged;
     }
 
     private static void UiSettings_ColorValuesChanged(UISettings sender, object args)
@@ -106,7 +87,7 @@ public static class ThemeHelper
 
     public static void UpdateSystemCaptionButtonColors()
     {
-        ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+        var titleBar = ApplicationView.GetForCurrentView().TitleBar;
 
         if (ThemeHelper.IsDarkTheme())
         {

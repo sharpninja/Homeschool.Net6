@@ -4,6 +4,8 @@ using Uno.UI.Runtime.Skia;
 
 namespace Homeschool.Net6.Skia.Gtk
 {
+	using App;
+
 	class Program
 	{
 		static void Main(string[] args)

@@ -1,0 +1,55 @@
+﻿{
+   "CodeGenerationMode": 2,
+   "ContextClassName": "HomeschoolContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "Context",
+   "OutputPath": null,
+   "ProjectRootNamespace": "Homeschool.Data",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[hs_chapter]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[hs_course]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[hs_gradebook]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[hs_lesson]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[hs_subject]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "PAYTON-DESKTOP.Homeschool",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": false,
+   "UseDbContextSplitting": true,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": true,
+   "UseLegacyPluralizer": true,
+   "UseManyToManyEntity": true,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": true,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": true,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}

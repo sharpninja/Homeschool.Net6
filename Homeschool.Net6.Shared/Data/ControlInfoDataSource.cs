@@ -141,7 +141,7 @@ public sealed class ControlInfoDataSource
     {
         await ControlInfoDataSource._instance.GetControlInfoDataAsync().ConfigureAwait(false);
         // Simple linear search is acceptable for small data sets
-        IEnumerable<ControlInfoDataGroup> matches = ControlInfoDataSource._instance.Groups.Where((group) => group.UniqueId.Equals(uniqueId));
+        var matches = ControlInfoDataSource._instance.Groups.Where((group) => group.UniqueId.Equals(uniqueId));
         if (matches.Count() == 1)
         {
             return matches.First();
@@ -154,7 +154,7 @@ public sealed class ControlInfoDataSource
     {
         await ControlInfoDataSource._instance.GetControlInfoDataAsync().ConfigureAwait(false);
         // Simple linear search is acceptable for small data sets
-        IEnumerable<ControlInfoDataItem> matches = ControlInfoDataSource._instance.Groups.SelectMany(group => group.Items).Where((item) => item.UniqueId.Equals(uniqueId));
+        var matches = ControlInfoDataSource._instance.Groups.SelectMany(group => group.Items).Where((item) => item.UniqueId.Equals(uniqueId));
         if (matches.Count() > 0)
         {
             return matches.First();
@@ -166,7 +166,7 @@ public sealed class ControlInfoDataSource
     public async Task<ControlInfoDataGroup> GetGroupFromItemAsync(string uniqueId)
     {
         await ControlInfoDataSource._instance.GetControlInfoDataAsync().ConfigureAwait(false);
-        IEnumerable<ControlInfoDataGroup> matches = ControlInfoDataSource._instance.Groups.Where((group) => group.Items.FirstOrDefault(item => item.UniqueId.Equals(uniqueId)) != null);
+        var matches = ControlInfoDataSource._instance.Groups.Where((group) => group.Items.FirstOrDefault(item => item.UniqueId.Equals(uniqueId)) != null);
         if (matches.Count() == 1)
         {
             return matches.First();
@@ -187,17 +187,17 @@ public sealed class ControlInfoDataSource
 
         Uri dataUri = new("ms-appx:///DataModel/ControlInfoData.json");
 
-        StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(dataUri);
-        string jsonText = await FileIO.ReadTextAsync(file);
+        var file = await StorageFile.GetFileFromApplicationUriAsync(dataUri);
+        var jsonText = await FileIO.ReadTextAsync(file);
 
-        JsonObject jsonObject = JsonObject.Parse(jsonText);
-        JsonArray jsonArray = jsonObject["Groups"].GetArray();
+        var jsonObject = JsonObject.Parse(jsonText);
+        var jsonArray = jsonObject["Groups"].GetArray();
 
         lock (ControlInfoDataSource._lock)
         {
             foreach (JsonValue groupValue in jsonArray)
             {
-                JsonObject groupObject = groupValue.GetObject();
+                var groupObject = groupValue.GetObject();
                 ControlInfoDataGroup group = new(groupObject["UniqueId"].GetString(),
                     groupObject["Title"].GetString(),
                     groupObject["Subtitle"].GetString(),
@@ -206,13 +206,13 @@ public sealed class ControlInfoDataSource
 
                 foreach (JsonValue itemValue in groupObject["Items"].GetArray())
                 {
-                    JsonObject itemObject = itemValue.GetObject();
+                    var itemObject = itemValue.GetObject();
 
                     string badgeString = null;
 
-                    bool isNew = itemObject.ContainsKey("IsNew") ? itemObject["IsNew"].GetBoolean() : false;
-                    bool isUpdated = itemObject.ContainsKey("IsUpdated") ? itemObject["IsUpdated"].GetBoolean() : false;
-                    bool isPreview = itemObject.ContainsKey("IsPreview") ? itemObject["IsPreview"].GetBoolean() : false;
+                    var isNew = itemObject.ContainsKey("IsNew") ? itemObject["IsNew"].GetBoolean() : false;
+                    var isUpdated = itemObject.ContainsKey("IsUpdated") ? itemObject["IsUpdated"].GetBoolean() : false;
+                    var isPreview = itemObject.ContainsKey("IsPreview") ? itemObject["IsPreview"].GetBoolean() : false;
 
                     if (isNew)
                     {
@@ -242,7 +242,7 @@ public sealed class ControlInfoDataSource
                     {
                         foreach (JsonValue docValue in itemObject["Docs"].GetArray())
                         {
-                            JsonObject docObject = docValue.GetObject();
+                            var docObject = docValue.GetObject();
                             item.Docs.Add(new(docObject["Title"].GetString(), docObject["Uri"].GetString()));
                         }
                     }

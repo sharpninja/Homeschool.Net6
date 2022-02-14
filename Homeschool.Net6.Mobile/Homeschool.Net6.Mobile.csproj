@@ -1,29 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net6.0-android</TargetFramework>
-    <SingleProject>true</SingleProject>
-    <OutputType>Exe</OutputType>
-    <!-- Debugger workaround https://github.com/dotnet/maui-samples/blob/8aa6b8780b12e97b157514c3bdc54bb4a13001cd/HelloMacCatalyst/HelloMacCatalyst.csproj#L7 -->
-    <!-- Required for C# Hot Reload -->
-    <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
-    <IsUnoHead>true</IsUnoHead>
-    <LangVersion>10.0</LangVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="7.1.2" />
-    <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
-    <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.0.13" Condition="'$(Configuration)'=='Debug'" />
-    <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.0.13" />
-    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
-    <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.3.1.4" />
-    <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.3.6.4" />
-    <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.11" />
-    <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.4" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFramework)'=='net6.0-android'">
-    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.4.0.4" />
-    <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.35" />
-  </ItemGroup>
-  <Import Project="..\Homeschool.Net6.Shared\Homeschool.App.Shared.projitems" Label="Shared" />
+    <PropertyGroup>
+        <TargetFramework>net6.0-android</TargetFramework>
+        <SingleProject>true</SingleProject>
+        <OutputType>Exe</OutputType>
+        <!-- Debugger workaround https://github.com/dotnet/maui-samples/blob/8aa6b8780b12e97b157514c3bdc54bb4a13001cd/HelloMacCatalyst/HelloMacCatalyst.csproj#L7 -->
+        <!-- Required for C# Hot Reload -->
+        <UseInterpreter Condition="'$(Configuration)' == 'Debug'">True</UseInterpreter>
+        <IsUnoHead>true</IsUnoHead>
+        <LangVersion>10.0</LangVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="7.1.2"/>
+        <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2"/>
+        <PackageReference Include="Uno.WinUI.RemoteControl" Version="4.0.13" Condition="'$(Configuration)'=='Debug'"/>
+        <PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.0.13"/>
+        <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0"/>
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0"/>
+        <PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.3.1.4"/>
+        <PackageReference Include="Xamarin.AndroidX.Fragment" Version="1.3.6.4"/>
+        <PackageReference Include="Xamarin.AndroidX.Legacy.Support.V4" Version="1.0.0.11"/>
+        <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.4"/>
+    </ItemGroup>
+    <ItemGroup Condition="'$(TargetFramework)'=='net6.0-android'">
+        <PackageReference Include="Xamarin.Google.Android.Material" Version="1.4.0.4"/>
+        <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.35"/>
+    </ItemGroup>
+    <Import Project="..\Homeschool.Net6.Shared\Homeschool.App.Shared.projitems" Label="Shared"/>
 </Project>

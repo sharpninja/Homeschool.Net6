@@ -1,0 +1,13 @@
+﻿{
+  "profiles": {
+    "Homeschool.Server": {
+        "commandName": "Project",
+        "dotnetRunMessages": true,
+        "launchBrowser": false,
+        "applicationUrl": "https://localhost:8443;http://localhost:8088",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        }
+    }
+  }
+}
