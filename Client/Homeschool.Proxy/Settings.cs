@@ -8,8 +8,8 @@ public class Settings
 {
     private const string DEFAULT_HOST_NAME = "localhost";
     public bool UseHttps { get; set; } = true;
-    public Uri? BasicHttpAddress { get; set; }
-    public Uri? BasicHttpsAddress { get; set; }
+    public Uri BasicHttpAddress { get; set; } = new Uri("http://localhost");
+    public Uri BasicHttpsAddress { get; set; } = new Uri("https://localhost");
     public Uri? WsHttpAddress { get; set; }
     public Uri? WsHttpAddressValidateUserPassword { get; set; }
     public Uri? WsHttpsAddress { get; set; }
@@ -28,19 +28,14 @@ public class Settings
         .Select(static a => new Uri(a)).ToArray();
     }
 
-    private static Uri? AddPathPrefix(Uri? source, string? prefix)
+    private static Uri AddPathPrefix(Uri source, string? prefix)
     {
         if (string.IsNullOrEmpty(prefix))
         {
             return source;
         }
 
-        if (source is null)
-        {
-            return default;
-        }
-
-        var builder = new UriBuilder(source);
+        UriBuilder builder = new (source);
         builder.Path = prefix + builder.Path;
         return builder.Uri;
 

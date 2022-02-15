@@ -43,7 +43,7 @@ const int DELAY = 3;
 Console.WriteLine($"Waiting {DELAY} seconds.");
 await Task.Delay(TimeSpan.FromSeconds(DELAY));
 Console.WriteLine("Starting proxy.");
-var proxy = host.Services.GetService<Homeschool.Proxy.Proxy>();
+var proxy = host.Services.GetService<Homeschool.Proxy.Proxy>()!;
 
 Console.WriteLine("Invoking proxy.");
 var result = proxy.Test();

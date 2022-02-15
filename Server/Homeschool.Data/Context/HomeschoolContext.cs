@@ -5,25 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
+#nullable enable
 
 namespace Homeschool.Data.Context
 {
-    using Microsoft.Extensions.DependencyInjection;
-
     public partial class HomeschoolContext : DbContext
     {
-        public static IServiceProvider ServiceProvider
-        {
-            get;
-            private set;
-        }
-
-        public HomeschoolContext(IServiceProvider serviceProvider, DbContextOptions<HomeschoolContext> options)
-            : base(options)
-        {
-            ServiceProvider = serviceProvider;
-        }
-
         public virtual DbSet<HsChapter> HsChapters { get; set; } = null!;
         public virtual DbSet<HsCourse> HsCourses { get; set; } = null!;
         public virtual DbSet<HsGradebook> HsGradebooks { get; set; } = null!;
@@ -42,11 +29,5 @@ namespace Homeschool.Data.Context
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
-    }
-
-    public partial class HomeschoolContext
-    {
-        public static HomeschoolContext GetNewContext()
-            => ServiceProvider?.GetRequiredService<HomeschoolContext>();
     }
 }

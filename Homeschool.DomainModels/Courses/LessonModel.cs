@@ -11,8 +11,13 @@ using Grades;
 public class LessonModel : IGradeContainer
 {
     private const string BASE_URL = "https://www.study.com";
+
     public LessonModel()
-        => Uid = Guid.NewGuid();
+    {
+        Uid = Guid.NewGuid();
+        Grades = Array.Empty<AssessmentGrade>()
+            .ToImmutableList();
+    }
 
     public LessonModel(ChapterModel? chapter, HsLesson entity)
     {
@@ -41,5 +46,5 @@ public class LessonModel : IGradeContainer
     public ChapterModel? Chapter { get; init; }
 
     [ DataMember ]
-    public ImmutableList<AssessmentGrade>? Grades { get; init; }
+    public ImmutableList<AssessmentGrade> Grades { get; init; }
 }

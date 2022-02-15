@@ -33,6 +33,9 @@ namespace Homeschool.Data
         public Guid? CourSubjUid { get; set; }
         [Column("cour_display_order", TypeName = "money")]
         public decimal CourDisplayOrder { get; set; }
+        [Required]
+        [Column("cour_enabled")]
+        public bool? CourEnabled { get; set; }
 
         [ForeignKey(nameof(CourSubjUid))]
         [InverseProperty(nameof(HsSubject.HsCourses))]

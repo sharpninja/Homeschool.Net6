@@ -8,8 +8,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Homeschool.Data
 {
-    using Context;
-
     [Table("hs_lesson")]
     [Index(nameof(LessChapUid), Name = "IX_hs_lesson_less_chap_uid")]
     public partial class HsLesson
@@ -19,13 +17,8 @@ namespace Homeschool.Data
         public Guid LessUid { get; set; }
         [Column("less_chap_uid")]
         public Guid LessChapUid { get; set; }
-
-        [ Column("less_title") ]
+        [Column("less_title")]
         public string LessTitle { get; set; } = null!;
-
-        [ Column("less_slug") ]
-        public string LessSlug { get; set; } = null!;
-
         [Column("less_url")]
         public string LessUrl { get; set; } = null!;
         [Column("less_points_earned")]
@@ -40,13 +33,15 @@ namespace Homeschool.Data
         public bool LessIsCompleted { get; set; }
         [Column("less_grade", TypeName = "money")]
         public decimal? LessGrade { get; set; }
+        [Column("less_slug")]
+        public string LessSlug { get; set; } = null!;
+        [Column("less_display_order")]
+        public int LessDisplayOrder { get; set; }
+        [Column("less_skip_lesson")]
+        public bool LessSkipLesson { get; set; }
 
         [ForeignKey(nameof(LessChapUid))]
         [InverseProperty(nameof(HsChapter.HsLessons))]
         public virtual HsChapter LessChapU { get; set; } = null!;
-
-        public List<HsGradebook> GetGrades()
-            => HomeschoolContext.GetNewContext()
-                .HsGradebooks.Where(g => g.GradLessTitle == LessSlug).ToList();
     }
 }

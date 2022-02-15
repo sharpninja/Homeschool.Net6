@@ -3,6 +3,8 @@
 using System;
 using System.ServiceModel;
 
+using DomainModels.Courses;
+
 internal static class ClientLogic
 {
     static ClientLogic()
@@ -21,10 +23,8 @@ internal static class ClientLogic
     {
         const string HOSTNAME = "LOCALHOST";
 
-        var hostname = HOSTNAME;
-
-        var settings = new Settings().SetDefaults(
-            hostname, "GradesService");
+        Settings settings = new Settings().SetDefaults(
+            HOSTNAME, "GradesService");
 
         return settings;
     }
@@ -42,12 +42,30 @@ internal static class ClientLogic
             $"BasicHttp: GetGradesByParent(parent: {parent}, scope: {scope}) => " +
             (result = getGradesByParent.WcfInvoke(
                 new BasicHttpBinding(BasicHttpSecurityMode.None),
-                Settings.BasicHttpAddress
+                Settings.BasicHttpAddress!
             ))
         );
 
         return result;
     }
+
+    public static LessonQueueItem[] GetLessonQueue(int? min = 7, int? max = 7)
+    {
+        var getLessonQueue = (Func<Homeschool.Server.IGradesService, LessonQueueItem[]?>)(channel
+            => channel.GetLessonQueue(min, max));
+
+        LessonQueueItem[]? result = Array.Empty<LessonQueueItem>();
+        Log?.Invoke(
+            $"BasicHttp: GetLessonQueue(min: {min}, max: {max}) => " +
+            (result = getLessonQueue.WcfInvoke(
+                new BasicHttpBinding(BasicHttpSecurityMode.None),
+                Settings.BasicHttpAddress!
+            ))
+        );
+
+        return result ?? Array.Empty<LessonQueueItem>();
+    }
+
 
     public static AssessmentGrade[]? GetGradesByFilter(GradesFilter filter)
     {
@@ -59,7 +77,7 @@ internal static class ClientLogic
             $"BasicHttp: GetGradesByFilter(filter: {filter}) => " +
             (result = getGradesByFilter.WcfInvoke(
                 new BasicHttpBinding(BasicHttpSecurityMode.None),
-                Settings.BasicHttpAddress
+                Settings.BasicHttpAddress!
             ))
         );
 

@@ -90,4 +90,15 @@ public class GradesService : IGradesService
 
     public AssessmentGrade[] GetGradesByFilter(GradesFilter filter)
         => throw new NotImplementedException();
+
+    public LessonQueueItem[]? GetLessonQueue(int? min, int? max)
+    {
+        var queueItems =
+            Context.Procedures.usp_GetLessonQueueAsync(min, max)
+                .GetAwaiter()
+                .GetResult();
+
+        return queueItems.Select(q => new LessonQueueItem(q))
+            .ToArray();
+    }
 }

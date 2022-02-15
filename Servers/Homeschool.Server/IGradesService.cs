@@ -1,5 +1,7 @@
 ﻿namespace Homeschool.Server
 {
+    using DomainModels.Courses;
+
     [ServiceContract]
     public interface IGradesService
     {
@@ -8,5 +10,8 @@
 
         [OperationContract]
         AssessmentGrade[]? GetGradesByFilter(GradesFilter filter);
+
+        [ OperationContract ]
+        LessonQueueItem[]? GetLessonQueue(int? min, int? max);
     }
 }

@@ -10,6 +10,12 @@ public static class WCFExtension
     public static async Task<TResult> WcfInvokeAsync<TContract, TResult>(this ChannelFactory<TContract> factory, Func<TContract, Task<TResult>> action)
     {
         TContract client = factory.CreateChannel();
+
+        if (client is null)
+        {
+            throw new ApplicationException("Could not create client.");
+        }
+
         IClientChannel clientInstance = ((IClientChannel)client);
 
         try
@@ -31,7 +37,7 @@ public static class WCFExtension
     }
 
     public static async Task<TResult> WcfInvokeAsync<TContract, TResult>(this Func<TContract, Task<TResult>> wcfAction,
-        Binding binding, Uri url, Action<ChannelFactory<TContract>> factorySetup = null)
+        Binding binding, Uri url, Action<ChannelFactory<TContract>>? factorySetup = null)
     {
         binding.ApplyDebugTimeouts();
         var factory = new ChannelFactory<TContract>(binding, new EndpointAddress(url));
@@ -52,7 +58,13 @@ public static class WCFExtension
     public static TResult WcfInvoke<TContract, TResult>(this ChannelFactory<TContract> factory, Func<TContract, TResult> action)
     {
         TContract client = factory.CreateChannel();
-        var clientInstance = ((IClientChannel)client);
+
+        if (client is null)
+        {
+            throw new ApplicationException("Could not create client.");
+        }
+
+        IClientChannel clientInstance = (IClientChannel)client;
 
         try
         {
@@ -73,7 +85,7 @@ public static class WCFExtension
     }
 
     public static TResult WcfInvoke<TContract, TResult>(this Func<TContract, TResult> wcfAction,
-        Binding binding, Uri url, Action<ChannelFactory<TContract>> factorySetup = null)
+        Binding binding, Uri url, Action<ChannelFactory<TContract>>? factorySetup = null)
     {
         binding.ApplyDebugTimeouts();
 

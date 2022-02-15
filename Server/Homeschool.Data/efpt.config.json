@@ -32,6 +32,10 @@
       {
          "Name": "[dbo].[hs_subject]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[usp_GetLessonQueue]",
+         "ObjectType": 1
       }
    ],
    "UiHint": "PAYTON-DESKTOP.Homeschool",

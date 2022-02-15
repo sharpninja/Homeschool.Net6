@@ -13,6 +13,8 @@ public class CourseModel : IGradeContainer
     public CourseModel()
     {
         Uid = Guid.NewGuid();
+        Chapters = Array.Empty<ChapterModel>()
+            .ToImmutableList();
     }
 
     public CourseModel(HsCourse entity)
@@ -43,5 +45,5 @@ public class CourseModel : IGradeContainer
     public Uri? CourseFullUri { get; init; }
 
     [ DataMember ]
-    public ImmutableList<ChapterModel>? Chapters { get; init; }
+    public ImmutableList<ChapterModel> Chapters { get; init; }
 }

@@ -1,5 +1,9 @@
 ﻿namespace Homeschool.Proxy
 {
+    using Data;
+
+    using DomainModels.Courses;
+
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
@@ -8,9 +12,9 @@
     {
         public void Initialize(IServiceProvider services)
         {
-            this.Config = services.GetRequiredService<IConfiguration>();
+            this.Config = services.GetRequiredService<IConfiguration>()!;
 
-            this.Settings = ClientLogic.BuildClientSettings();
+            this.Settings = ClientLogic.BuildClientSettings()!;
 
             this.Logger = services.GetService<ILogger<Proxy>>()!;
         }
@@ -20,39 +24,52 @@
             void Log(string value) => Logger.LogInformation(value);
 
             ClientLogic.SetLog(Log);
-            var result = ClientLogic.GetGradesByParent(
-                Guid.Parse("99F38BA7-2F27-41BE-85C2-BA2323B273B8"),
-                GradesScopes.All);
+            //var result = ClientLogic.GetGradesByParent(
+            //    Guid.Parse("99F38BA7-2F27-41BE-85C2-BA2323B273B8"),
+            //    GradesScopes.All);
+
+            var result = GetLessonQueue();
 
             Log($"lesson: [{result}]");
 
-            if (result is IEnumerable<AssessmentGrade> enumerable)
+            if (result is null)
             {
-                Log($"enumerable.count(): {enumerable.Count()}");
-                return string.Join("\n", enumerable);
+                return "Null results;";
             }
-            else
-            {
-                return result?.ToString();
-            }
+
+            Log($"enumerable.count(): {result.Count()}");
+                return string.Join("\n", result.Select(r => r.ToString()));
+        }
+
+        public LessonQueueItem[] GetLessonQueue(int? min = 7, int? max = 7)
+        {
+            void Log(string value)
+                => Logger.LogInformation(value);
+
+            ClientLogic.SetLog(Log);
+            var result = ClientLogic.GetLessonQueue(min, max);
+
+            Log($"lesson: [{result}]");
+
+            return result;
         }
 
         public ILogger<Proxy> Logger
         {
             get;
             set;
-        }
+        } = null!;
 
         public IConfiguration Config
         {
             get;
             set;
-        }
+        } = null!;
 
         public Settings Settings
         {
             get;
             set;
-        }
+        } = null!;
     }
 }

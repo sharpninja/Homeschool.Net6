@@ -17,6 +17,8 @@ namespace Homeschool.Data.Context.Configurations
         {
             entity.Property(e => e.CourUid).HasDefaultValueSql("(newid())");
 
+            entity.Property(e => e.CourEnabled).HasDefaultValueSql("((1))");
+
             entity.HasOne(d => d.CourSubjU)
                 .WithMany(p => p.HsCourses)
                 .HasForeignKey(d => d.CourSubjUid)

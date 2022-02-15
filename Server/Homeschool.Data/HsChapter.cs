@@ -24,6 +24,10 @@ namespace Homeschool.Data
         public Guid? ChapCourUid { get; set; }
         [Column("chap_title")]
         public string ChapTitle { get; set; } = null!;
+        [Column("chap_slug")]
+        public string ChapSlug { get; set; } = null!;
+        [Column("chap_display_order")]
+        public int ChapDisplayOrder { get; set; }
 
         [ForeignKey(nameof(ChapCourUid))]
         [InverseProperty(nameof(HsCourse.HsChapters))]
