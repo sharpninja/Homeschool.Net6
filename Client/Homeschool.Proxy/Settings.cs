@@ -15,16 +15,17 @@ public class Settings
     public Uri? WsHttpsAddress { get; set; }
     public Uri? NetTcpAddress { get; set; }
 
-    public int HttpPort { get; set; } = 8088;
-    public int HttpsPort { get; set; } = 8443;
+    public int HttpPort { get; set; } = 5000; //8088;
+    public int HttpsPort { get; set; } = 5001; // 8443;
     public int NettcpPort { get; set; } = 8089;
 
     public IEnumerable<Uri> GetBaseAddresses(string hostname = DEFAULT_HOST_NAME)
     {
         return new[] {
-                $"net.tcp://{hostname}:{NettcpPort}/",
+                //$"net.tcp://{hostname}:{NettcpPort}/",
                 $"http://{hostname}:{HttpPort}/",
-                $"https://{hostname}:{HttpsPort}/" }
+                //$"https://{hostname}:{HttpsPort}/"
+            }
         .Select(static a => new Uri(a)).ToArray();
     }
 
@@ -46,18 +47,18 @@ public class Settings
         string hostname = DEFAULT_HOST_NAME,
         string? servicePrefix = default)
     {
-        var baseHttpAddress = hostname + ":8088";
-        var baseHttpsAddress = hostname + ":8443";
-        var baseTcpAddress = hostname + ":8089";
+        var baseHttpAddress = hostname + ":5000";
+        //var baseHttpsAddress = hostname + ":8443";
+        //var baseTcpAddress = hostname + ":8089";
 
         BasicHttpAddress = AddPathPrefix(
             new Uri($"http://{baseHttpAddress}/basichttp"),
             servicePrefix
         );
-        BasicHttpsAddress = AddPathPrefix(
-            new Uri($"https://{baseHttpsAddress}/basichttp"),
-            servicePrefix
-        );
+        //BasicHttpsAddress = AddPathPrefix(
+        //    new Uri($"https://{baseHttpsAddress}/basichttp"),
+        //    servicePrefix
+        //);
         //WsHttpAddress = AddPathPrefix(
         //    new Uri($"http://{baseHttpAddress}/wsHttp"),
         //    servicePrefix

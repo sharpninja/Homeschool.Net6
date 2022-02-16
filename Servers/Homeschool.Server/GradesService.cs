@@ -113,7 +113,7 @@ public class GradesService : IGradesService, IHostedService
             return null;
         }
 
-        hsLesson.LessMarkedCompleted = timestamp.UtcDateTime;
+        hsLesson.LessMarkedCompleted = timestamp.LocalDateTime;
 
         Context.SaveChanges();
 

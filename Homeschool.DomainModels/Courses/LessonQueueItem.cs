@@ -62,7 +62,7 @@ public partial class LessonQueueItem
     protected DateTimeOffset? markedCompleteDateTime;
 
     public string MarkedCompleteDateTimeFormatted
-        => $"{markedCompleteDateTime?.LocalDateTime.ToShortTimeString()}";
+        => $"{markedCompleteDateTime?.DateTime.ToLongTimeString()}";
 
     public bool Visibility => courseUid != Guid.Empty &&
                               (markedCompleteDateTime is null ||
