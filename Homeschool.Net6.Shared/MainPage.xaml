@@ -9,36 +9,41 @@
             <Setter Property="Padding" Value="0" />
         </Style>
     </Page.Resources>
-    <NavigationView x:Name="NavView"
-                    x:FieldModifier="internal"
-                    IsSettingsVisible="True"
-                    IsBackButtonVisible="Auto"
-                    IsBackEnabled="False"
-                    AlwaysShowHeader="False"
-                    PaneTitle="Activities"
-                    PaneDisplayMode="LeftCompact"
-                    ExpandedModeThresholdWidth="500"
-                    SelectionFollowsFocus="Disabled"
-                    ItemInvoked="NavItem_Invoked"
-                    >
+    <NavigationView x:Name="NavView" x:FieldModifier="internal" IsSettingsVisible="True" IsBackButtonVisible="Auto"
+            IsBackEnabled="False" AlwaysShowHeader="True" PaneTitle="Activities" PaneDisplayMode="LeftCompact"
+            ExpandedModeThresholdWidth="500" SelectionFollowsFocus="Disabled" ItemInvoked="NavItem_Invoked"
+            OpenPaneLength="300">
         <NavigationView.MenuItems>
-            <NavigationViewItem Content="Home" Tag="HomePage">
+            <!--<NavigationViewItem Content="Home" Tag="HomePage">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xEA8A;" />
                 </NavigationViewItem.Icon>
-            </NavigationViewItem>
-            <NavigationViewItem Content="Study.com" Tag="Studydotcom">
+            </NavigationViewItem>-->
+            <NavigationViewItem Content="Study.com" Tag="Studydotcom" x:Name="Study">
                 <NavigationViewItem.Icon>
                     <ImageIcon Source="Assets/studycom.png" />
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
-            <NavigationViewItem Content="Reasearch" Tag="ResearchPage">
+            <!--<NavigationViewItem Content="Reasearch" Tag="ResearchPage">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xF6FA;" />
                 </NavigationViewItem.Icon>
-            </NavigationViewItem>
+            </NavigationViewItem>-->
         </NavigationView.MenuItems>
-        <Frame x:Name="RootPane" x:FieldModifier="public" Navigated="Frame_Navigated" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <ContentPresenter Grid.Row="0" x:Name="RootPane" x:FieldModifier="public" />
+            <Border Padding="8" Grid.Row="1"
+                    BorderThickness="0,1,0,0"
+                    BorderBrush="{ThemeResource SystemControlForegroundBaseMediumLowBrush}"
+                    Background="{ThemeResource AcrylicBackgroundFillColorDefaultBrush}"
+                    HorizontalAlignment="Stretch">
+                <TextBlock Text="{x:Bind ViewModel.Status, Mode=OneWay}" VerticalAlignment="Bottom" />
+            </Border>
 
+        </Grid>
     </NavigationView>
 </Page>

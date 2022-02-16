@@ -1,5 +1,6 @@
 namespace Homeschool.Server;
 
+using Data;
 using Data.Context;
 
 using DomainModels.Courses;
@@ -8,7 +9,7 @@ using DomainModels.Grades;
 using Microsoft.EntityFrameworkCore;
 
 [ServiceBehavior(IncludeExceptionDetailInFaults = true)]
-public class GradesService : IGradesService
+public class GradesService : IGradesService, IHostedService
 {
     public HomeschoolContext Context
     {
@@ -24,7 +25,6 @@ public class GradesService : IGradesService
     {
         Logger = logger;
         Context = context;
-
     }
 
     public AssessmentGrade[]? GetGradesByParent(Guid parent, GradesScopes scope)
@@ -98,7 +98,94 @@ public class GradesService : IGradesService
                 .GetAwaiter()
                 .GetResult();
 
-        return queueItems.Select(q => new LessonQueueItem(q))
+        return queueItems.Select((q, index) => new LessonQueueItem(q, index))
             .ToArray();
+    }
+
+    public LessonModel? MarkLessonCompleted(Guid lessonUid, DateTimeOffset timestamp)
+    {
+        var hsLesson = Context
+            .HsLessons
+            .FirstOrDefault(l => l.LessUid == lessonUid);
+
+        if (hsLesson is null)
+        {
+            return null;
+        }
+
+        hsLesson.LessMarkedCompleted = timestamp.UtcDateTime;
+
+        Context.SaveChanges();
+
+        var result = new LessonModel(null, hsLesson);
+
+        return result;
+    }
+
+    public Task StartAsync(CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
+    }
+
+    public Task StopAsync(CancellationToken cancellationToken)
+    {
+        return Task.CompletedTask;
+    }
+}
+
+public sealed class WindowsBackgroundService : BackgroundService
+{
+    private readonly GradesService _gradesService;
+    private readonly ILogger<WindowsBackgroundService> _logger;
+
+    public WindowsBackgroundService(
+        GradesService gradesService,
+        ILogger<WindowsBackgroundService> logger
+    )
+        => (_gradesService, _logger) = (gradesService, logger);
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        var builder = WebApplication.CreateBuilder();
+        builder.WebHost.ConfigureKestrel(
+            static (context, options) =>
+            {
+                options.AllowSynchronousIO = true;
+            }
+        );
+        builder.Services.AddSingleton(
+                provider =>
+                {
+                    string cs = provider.GetRequiredService<IConfiguration>()["ConnectionString"];
+
+                    return new DbContextOptionsBuilder<HomeschoolContext>()
+                        .EnableDetailedErrors(true)
+                        .UseSqlServer(
+                            cs,
+                            builder =>
+                            {
+                            }
+                        )
+                        .Options;
+                }
+            )
+            .AddTransient<GradesService>()
+            .AddDbContext<HomeschoolContext>()
+            .AddServiceModelServices();
+
+        var app = builder.Build();
+
+        app.UseServiceModel(
+            builder =>
+            {
+                builder.AddService<GradesService>()
+                    .AddServiceEndpoint<GradesService, IGradesService>(
+                        new BasicHttpBinding(),
+                        "/GradesService/basichttp"
+                    );
+            }
+        );
+
+        app.Run();
     }
 }

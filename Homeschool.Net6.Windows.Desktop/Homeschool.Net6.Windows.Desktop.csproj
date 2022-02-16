@@ -22,80 +22,98 @@
         <DefaultLanguage>en-US</DefaultLanguage>
         <DefineConstants>__WINUI_3__</DefineConstants>
         <LangVersion>10.0</LangVersion>
-        <DefineConstants>DISABLE_XAML_GENERATED_MAIN</DefineConstants>
+        <DefineConstants>DISABLE_XAML_GENERATED_MAIN;DISABLE_XAML_GENERATED_BREAK_ON_UNHANDLED_EXCEPTION</DefineConstants>
+        <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+        <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+        <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+        <AppxPackageDir>C:\GitHub\Homeschool.Net6\Packages\</AppxPackageDir>
+        <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
+        <GenerateTestArtifacts>True</GenerateTestArtifacts>
+        <AppxBundle>Auto</AppxBundle>
+        <AppxBundlePlatforms>x64</AppxBundlePlatforms>
+        <AppInstallerUri>\\payton-desktop\d%24</AppInstallerUri>
+        <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     </PropertyGroup>
     <ItemGroup>
-        <Compile Remove="BrowserControl\BrowserControlWebView2.xaml.cs"/>
+        <Compile Remove="BrowserControl\BrowserControlWebView2.xaml.cs" />
     </ItemGroup>
     <ItemGroup>
-        <None Remove="Assets\LockScreenLogo.scale-200.png"/>
-        <None Remove="Assets\SplashScreen.scale-200.png"/>
-        <None Remove="Assets\Square150x150Logo.scale-200.png"/>
-        <None Remove="Assets\Square44x44Logo.scale-200.png"/>
-        <None Remove="Assets\Square44x44Logo.targetsize-24_altform-unplated.png"/>
-        <None Remove="Assets\StoreLogo.png"/>
-        <None Remove="Assets\Wide310x150Logo.scale-200.png"/>
-        <None Remove="BrowserControl\BrowserControlWebView2.xaml"/>
-        <None Remove="Images\AppIcon.scale-100.png"/>
-        <None Remove="Images\AppIcon.scale-125.png"/>
-        <None Remove="Images\AppIcon.scale-150.png"/>
-        <None Remove="Images\AppIcon.scale-200.png"/>
-        <None Remove="Images\AppIcon.scale-400.png"/>
-        <None Remove="Images\AppIcon.targetsize-16.png"/>
-        <None Remove="Images\AppIcon.targetsize-16_altform-lightunplated.png"/>
-        <None Remove="Images\AppIcon.targetsize-16_altform-unplated.png"/>
-        <None Remove="Images\AppIcon.targetsize-24.png"/>
-        <None Remove="Images\AppIcon.targetsize-24_altform-lightunplated.png"/>
-        <None Remove="Images\AppIcon.targetsize-24_altform-unplated.png"/>
-        <None Remove="Images\AppIcon.targetsize-256.png"/>
-        <None Remove="Images\AppIcon.targetsize-256_altform-lightunplated.png"/>
-        <None Remove="Images\AppIcon.targetsize-256_altform-unplated.png"/>
-        <None Remove="Images\AppIcon.targetsize-32.png"/>
-        <None Remove="Images\AppIcon.targetsize-32_altform-lightunplated.png"/>
-        <None Remove="Images\AppIcon.targetsize-32_altform-unplated.png"/>
-        <None Remove="Images\AppIcon.targetsize-48.png"/>
-        <None Remove="Images\AppIcon.targetsize-48_altform-lightunplated.png"/>
-        <None Remove="Images\AppIcon.targetsize-48_altform-unplated.png"/>
-        <None Remove="Images\BadgeLogo.scale-100.png"/>
-        <None Remove="Images\BadgeLogo.scale-125.png"/>
-        <None Remove="Images\BadgeLogo.scale-150.png"/>
-        <None Remove="Images\BadgeLogo.scale-200.png"/>
-        <None Remove="Images\BadgeLogo.scale-400.png"/>
-        <None Remove="Images\LargeTile.scale-100.png"/>
-        <None Remove="Images\LargeTile.scale-125.png"/>
-        <None Remove="Images\LargeTile.scale-150.png"/>
-        <None Remove="Images\LargeTile.scale-200.png"/>
-        <None Remove="Images\LargeTile.scale-400.png"/>
-        <None Remove="Images\MediumTile.scale-100.png"/>
-        <None Remove="Images\MediumTile.scale-125.png"/>
-        <None Remove="Images\MediumTile.scale-150.png"/>
-        <None Remove="Images\MediumTile.scale-200.png"/>
-        <None Remove="Images\MediumTile.scale-400.png"/>
-        <None Remove="Images\PackageLogo.scale-100.png"/>
-        <None Remove="Images\PackageLogo.scale-125.png"/>
-        <None Remove="Images\PackageLogo.scale-150.png"/>
-        <None Remove="Images\PackageLogo.scale-200.png"/>
-        <None Remove="Images\PackageLogo.scale-400.png"/>
-        <None Remove="Images\SmallTile.scale-100.png"/>
-        <None Remove="Images\SmallTile.scale-125.png"/>
-        <None Remove="Images\SmallTile.scale-150.png"/>
-        <None Remove="Images\SmallTile.scale-200.png"/>
-        <None Remove="Images\SmallTile.scale-400.png"/>
-        <None Remove="Images\SplashScreen.scale-100.png"/>
-        <None Remove="Images\SplashScreen.scale-125.png"/>
-        <None Remove="Images\SplashScreen.scale-150.png"/>
-        <None Remove="Images\SplashScreen.scale-200.png"/>
-        <None Remove="Images\SplashScreen.scale-400.png"/>
-        <None Remove="Images\WideTile.scale-100.png"/>
-        <None Remove="Images\WideTile.scale-125.png"/>
-        <None Remove="Images\WideTile.scale-150.png"/>
-        <None Remove="Images\WideTile.scale-200.png"/>
-        <None Remove="Images\WideTile.scale-400.png"/>
-        <None Remove="MainWindow.xaml"/>
-        <None Remove="Package.appxmanifest"/>
+        <None Remove="appsettings.Development.json" />
+        <None Remove="appsettings.json" />
+        <None Remove="Assets\english.png" />
+        <None Remove="Assets\history.png" />
+        <None Remove="Assets\humanities.png" />
+        <None Remove="Assets\LockScreenLogo.scale-200.png" />
+        <None Remove="Assets\math.png" />
+        <None Remove="Assets\science.png" />
+        <None Remove="Assets\SplashScreen.scale-200.png" />
+        <None Remove="Assets\Square150x150Logo.scale-200.png" />
+        <None Remove="Assets\Square44x44Logo.scale-200.png" />
+        <None Remove="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+        <None Remove="Assets\StoreLogo.png" />
+        <None Remove="Assets\technology.png" />
+        <None Remove="Assets\Wide310x150Logo.scale-200.png" />
+        <None Remove="BrowserControl\BrowserControlWebView2.xaml" />
+        <None Remove="Images\AppIcon.scale-100.png" />
+        <None Remove="Images\AppIcon.scale-125.png" />
+        <None Remove="Images\AppIcon.scale-150.png" />
+        <None Remove="Images\AppIcon.scale-200.png" />
+        <None Remove="Images\AppIcon.scale-400.png" />
+        <None Remove="Images\AppIcon.targetsize-16.png" />
+        <None Remove="Images\AppIcon.targetsize-16_altform-lightunplated.png" />
+        <None Remove="Images\AppIcon.targetsize-16_altform-unplated.png" />
+        <None Remove="Images\AppIcon.targetsize-24.png" />
+        <None Remove="Images\AppIcon.targetsize-24_altform-lightunplated.png" />
+        <None Remove="Images\AppIcon.targetsize-24_altform-unplated.png" />
+        <None Remove="Images\AppIcon.targetsize-256.png" />
+        <None Remove="Images\AppIcon.targetsize-256_altform-lightunplated.png" />
+        <None Remove="Images\AppIcon.targetsize-256_altform-unplated.png" />
+        <None Remove="Images\AppIcon.targetsize-32.png" />
+        <None Remove="Images\AppIcon.targetsize-32_altform-lightunplated.png" />
+        <None Remove="Images\AppIcon.targetsize-32_altform-unplated.png" />
+        <None Remove="Images\AppIcon.targetsize-48.png" />
+        <None Remove="Images\AppIcon.targetsize-48_altform-lightunplated.png" />
+        <None Remove="Images\AppIcon.targetsize-48_altform-unplated.png" />
+        <None Remove="Images\BadgeLogo.scale-100.png" />
+        <None Remove="Images\BadgeLogo.scale-125.png" />
+        <None Remove="Images\BadgeLogo.scale-150.png" />
+        <None Remove="Images\BadgeLogo.scale-200.png" />
+        <None Remove="Images\BadgeLogo.scale-400.png" />
+        <None Remove="Images\LargeTile.scale-100.png" />
+        <None Remove="Images\LargeTile.scale-125.png" />
+        <None Remove="Images\LargeTile.scale-150.png" />
+        <None Remove="Images\LargeTile.scale-200.png" />
+        <None Remove="Images\LargeTile.scale-400.png" />
+        <None Remove="Images\MediumTile.scale-100.png" />
+        <None Remove="Images\MediumTile.scale-125.png" />
+        <None Remove="Images\MediumTile.scale-150.png" />
+        <None Remove="Images\MediumTile.scale-200.png" />
+        <None Remove="Images\MediumTile.scale-400.png" />
+        <None Remove="Images\PackageLogo.scale-100.png" />
+        <None Remove="Images\PackageLogo.scale-125.png" />
+        <None Remove="Images\PackageLogo.scale-150.png" />
+        <None Remove="Images\PackageLogo.scale-200.png" />
+        <None Remove="Images\PackageLogo.scale-400.png" />
+        <None Remove="Images\SmallTile.scale-100.png" />
+        <None Remove="Images\SmallTile.scale-125.png" />
+        <None Remove="Images\SmallTile.scale-150.png" />
+        <None Remove="Images\SmallTile.scale-200.png" />
+        <None Remove="Images\SmallTile.scale-400.png" />
+        <None Remove="Images\SplashScreen.scale-100.png" />
+        <None Remove="Images\SplashScreen.scale-125.png" />
+        <None Remove="Images\SplashScreen.scale-150.png" />
+        <None Remove="Images\SplashScreen.scale-200.png" />
+        <None Remove="Images\SplashScreen.scale-400.png" />
+        <None Remove="Images\WideTile.scale-100.png" />
+        <None Remove="Images\WideTile.scale-125.png" />
+        <None Remove="Images\WideTile.scale-150.png" />
+        <None Remove="Images\WideTile.scale-200.png" />
+        <None Remove="Images\WideTile.scale-400.png" />
+        <None Remove="MainWindow.xaml" />
+        <None Remove="Package.appxmanifest" />
     </ItemGroup>
     <ItemGroup>
-        <Page Remove="BrowserControl\BrowserControlWebView2.xaml"/>
+        <Page Remove="BrowserControl\BrowserControlWebView2.xaml" />
     </ItemGroup>
     <ItemGroup>
         <AppxManifest Include="Package.appxmanifest">
@@ -104,114 +122,136 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Manifest Include="$(ApplicationManifest)"/>
+        <Manifest Include="$(ApplicationManifest)" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="CommunityToolkit.Extensions.Hosting.WindowsAppSdk" Version="1.0.1"/>
-        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0-preview1"/>
-        <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2"/>
-        <PackageReference Include="Microsoft.Windows.CsWinRT" Version="1.4.1"/>
-        <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0"/>
-        <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197"/>
-        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0"/>
-        <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.8"/>
-        <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1"/>
-        <PackageReference Include="Uno.WinUI" Version="4.0.13"/>
+        <PackageReference Include="CommunityToolkit.Extensions.Hosting.WindowsAppSdk" Version="1.0.1" />
+        <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0-preview1" />
+        <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
+        <PackageReference Include="Microsoft.Windows.CsWinRT" Version="1.4.1" />
+        <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
+        <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />
+        <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.8" />
+        <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
+        <PackageReference Include="Uno.WinUI" Version="4.0.13" />
     </ItemGroup>
 
     <ItemGroup>
-        <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.22000.21"/>
-        <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22000.21"/>
-        <Manifest Include="$(ApplicationManifest)"/>
+        <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.22000.21" />
+        <FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22000.21" />
+        <Manifest Include="$(ApplicationManifest)" />
     </ItemGroup>
 
     <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnablePreviewMsixTooling)'=='true'">
-        <ProjectCapability Include="Msix"/>
+        <ProjectCapability Include="Msix" />
     </ItemGroup>
 
-    <Import Project="..\Homeschool.Net6.Shared\Homeschool.App.Shared.projitems" Label="Shared"/>
+    <Import Project="..\Homeschool.Net6.Shared\Homeschool.App.Shared.projitems" Label="Shared" />
 
     <ItemGroup>
-        <_Globbed_Compile Remove="BrowserControl\BrowserControlWebView2.xaml.cs"/>
-        <_Globbed_Compile Remove="MainWindow.xaml.cs"/>
-        <_Globbed_Compile Remove="Program.cs"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <_Globbed_Content Remove="Assets\LockScreenLogo.scale-200.png"/>
-        <_Globbed_Content Remove="Assets\SplashScreen.scale-200.png"/>
-        <_Globbed_Content Remove="Assets\Square150x150Logo.scale-200.png"/>
-        <_Globbed_Content Remove="Assets\Square44x44Logo.scale-200.png"/>
-        <_Globbed_Content Remove="Assets\Square44x44Logo.targetsize-24_altform-unplated.png"/>
-        <_Globbed_Content Remove="Assets\StoreLogo.png"/>
-        <_Globbed_Content Remove="Assets\Wide310x150Logo.scale-200.png"/>
+        <_Globbed_Compile Remove="BrowserControl\BrowserControlWebView2.xaml.cs" />
+        <_Globbed_Compile Remove="MainWindow.xaml.cs" />
+        <_Globbed_Compile Remove="Program.cs" />
     </ItemGroup>
 
     <ItemGroup>
-        <_Globbled_Page Remove="BrowserControl\BrowserControlWebView2.xaml"/>
-        <_Globbled_Page Remove="MainWindow.xaml"/>
+        <_Globbed_Content Remove="Assets\english.png" />
+        <_Globbed_Content Remove="Assets\history.png" />
+        <_Globbed_Content Remove="Assets\humanities.png" />
+        <_Globbed_Content Remove="Assets\LockScreenLogo.scale-200.png" />
+        <_Globbed_Content Remove="Assets\math.png" />
+        <_Globbed_Content Remove="Assets\science.png" />
+        <_Globbed_Content Remove="Assets\SplashScreen.scale-200.png" />
+        <_Globbed_Content Remove="Assets\Square150x150Logo.scale-200.png" />
+        <_Globbed_Content Remove="Assets\Square44x44Logo.scale-200.png" />
+        <_Globbed_Content Remove="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+        <_Globbed_Content Remove="Assets\StoreLogo.png" />
+        <_Globbed_Content Remove="Assets\technology.png" />
+        <_Globbed_Content Remove="Assets\Wide310x150Logo.scale-200.png" />
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="Images\AppIcon.scale-100.png"/>
-        <Content Include="Images\AppIcon.scale-125.png"/>
-        <Content Include="Images\AppIcon.scale-150.png"/>
-        <Content Include="Images\AppIcon.scale-200.png"/>
-        <Content Include="Images\AppIcon.scale-400.png"/>
-        <Content Include="Images\AppIcon.targetsize-16.png"/>
-        <Content Include="Images\AppIcon.targetsize-16_altform-lightunplated.png"/>
-        <Content Include="Images\AppIcon.targetsize-16_altform-unplated.png"/>
-        <Content Include="Images\AppIcon.targetsize-24.png"/>
-        <Content Include="Images\AppIcon.targetsize-24_altform-lightunplated.png"/>
-        <Content Include="Images\AppIcon.targetsize-24_altform-unplated.png"/>
-        <Content Include="Images\AppIcon.targetsize-256.png"/>
-        <Content Include="Images\AppIcon.targetsize-256_altform-lightunplated.png"/>
-        <Content Include="Images\AppIcon.targetsize-256_altform-unplated.png"/>
-        <Content Include="Images\AppIcon.targetsize-32.png"/>
-        <Content Include="Images\AppIcon.targetsize-32_altform-lightunplated.png"/>
-        <Content Include="Images\AppIcon.targetsize-32_altform-unplated.png"/>
-        <Content Include="Images\AppIcon.targetsize-48.png"/>
-        <Content Include="Images\AppIcon.targetsize-48_altform-lightunplated.png"/>
-        <Content Include="Images\AppIcon.targetsize-48_altform-unplated.png"/>
-        <Content Include="Images\BadgeLogo.scale-100.png"/>
-        <Content Include="Images\BadgeLogo.scale-125.png"/>
-        <Content Include="Images\BadgeLogo.scale-150.png"/>
-        <Content Include="Images\BadgeLogo.scale-200.png"/>
-        <Content Include="Images\BadgeLogo.scale-400.png"/>
-        <Content Include="Images\LargeTile.scale-100.png"/>
-        <Content Include="Images\LargeTile.scale-125.png"/>
-        <Content Include="Images\LargeTile.scale-150.png"/>
-        <Content Include="Images\LargeTile.scale-200.png"/>
-        <Content Include="Images\LargeTile.scale-400.png"/>
-        <Content Include="Images\MediumTile.scale-100.png"/>
-        <Content Include="Images\MediumTile.scale-125.png"/>
-        <Content Include="Images\MediumTile.scale-150.png"/>
-        <Content Include="Images\MediumTile.scale-200.png"/>
-        <Content Include="Images\MediumTile.scale-400.png"/>
-        <Content Include="Images\PackageLogo.scale-100.png"/>
-        <Content Include="Images\PackageLogo.scale-125.png"/>
-        <Content Include="Images\PackageLogo.scale-150.png"/>
-        <Content Include="Images\PackageLogo.scale-200.png"/>
-        <Content Include="Images\PackageLogo.scale-400.png"/>
-        <Content Include="Images\SmallTile.scale-100.png"/>
-        <Content Include="Images\SmallTile.scale-125.png"/>
-        <Content Include="Images\SmallTile.scale-150.png"/>
-        <Content Include="Images\SmallTile.scale-200.png"/>
-        <Content Include="Images\SmallTile.scale-400.png"/>
-        <Content Include="Images\SplashScreen.scale-100.png"/>
-        <Content Include="Images\SplashScreen.scale-125.png"/>
-        <Content Include="Images\SplashScreen.scale-150.png"/>
-        <Content Include="Images\SplashScreen.scale-200.png"/>
-        <Content Include="Images\SplashScreen.scale-400.png"/>
-        <Content Include="Images\WideTile.scale-100.png"/>
-        <Content Include="Images\WideTile.scale-125.png"/>
-        <Content Include="Images\WideTile.scale-150.png"/>
-        <Content Include="Images\WideTile.scale-200.png"/>
-        <Content Include="Images\WideTile.scale-400.png"/>
+        <_Globbled_Page Remove="BrowserControl\BrowserControlWebView2.xaml" />
+        <_Globbled_Page Remove="MainWindow.xaml" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="BrowserControl\"/>
+        <Content Include="appsettings.Development.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+          <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+          <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+        <Content Include="appsettings.json">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+          <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+          <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+        </Content>
+        <Content Include="Images\AppIcon.scale-100.png" />
+        <Content Include="Images\AppIcon.scale-125.png" />
+        <Content Include="Images\AppIcon.scale-150.png" />
+        <Content Include="Images\AppIcon.scale-200.png" />
+        <Content Include="Images\AppIcon.scale-400.png" />
+        <Content Include="Images\AppIcon.targetsize-16.png" />
+        <Content Include="Images\AppIcon.targetsize-16_altform-lightunplated.png" />
+        <Content Include="Images\AppIcon.targetsize-16_altform-unplated.png" />
+        <Content Include="Images\AppIcon.targetsize-24.png" />
+        <Content Include="Images\AppIcon.targetsize-24_altform-lightunplated.png" />
+        <Content Include="Images\AppIcon.targetsize-24_altform-unplated.png" />
+        <Content Include="Images\AppIcon.targetsize-256.png" />
+        <Content Include="Images\AppIcon.targetsize-256_altform-lightunplated.png" />
+        <Content Include="Images\AppIcon.targetsize-256_altform-unplated.png" />
+        <Content Include="Images\AppIcon.targetsize-32.png" />
+        <Content Include="Images\AppIcon.targetsize-32_altform-lightunplated.png" />
+        <Content Include="Images\AppIcon.targetsize-32_altform-unplated.png" />
+        <Content Include="Images\AppIcon.targetsize-48.png" />
+        <Content Include="Images\AppIcon.targetsize-48_altform-lightunplated.png" />
+        <Content Include="Images\AppIcon.targetsize-48_altform-unplated.png" />
+        <Content Include="Images\BadgeLogo.scale-100.png" />
+        <Content Include="Images\BadgeLogo.scale-125.png" />
+        <Content Include="Images\BadgeLogo.scale-150.png" />
+        <Content Include="Images\BadgeLogo.scale-200.png" />
+        <Content Include="Images\BadgeLogo.scale-400.png" />
+        <Content Include="Images\LargeTile.scale-100.png" />
+        <Content Include="Images\LargeTile.scale-125.png" />
+        <Content Include="Images\LargeTile.scale-150.png" />
+        <Content Include="Images\LargeTile.scale-200.png" />
+        <Content Include="Images\LargeTile.scale-400.png" />
+        <Content Include="Images\MediumTile.scale-100.png" />
+        <Content Include="Images\MediumTile.scale-125.png" />
+        <Content Include="Images\MediumTile.scale-150.png" />
+        <Content Include="Images\MediumTile.scale-200.png" />
+        <Content Include="Images\MediumTile.scale-400.png" />
+        <Content Include="Images\PackageLogo.scale-100.png" />
+        <Content Include="Images\PackageLogo.scale-125.png" />
+        <Content Include="Images\PackageLogo.scale-150.png" />
+        <Content Include="Images\PackageLogo.scale-200.png" />
+        <Content Include="Images\PackageLogo.scale-400.png" />
+        <Content Include="Images\SmallTile.scale-100.png" />
+        <Content Include="Images\SmallTile.scale-125.png" />
+        <Content Include="Images\SmallTile.scale-150.png" />
+        <Content Include="Images\SmallTile.scale-200.png" />
+        <Content Include="Images\SmallTile.scale-400.png" />
+        <Content Include="Images\SplashScreen.scale-100.png" />
+        <Content Include="Images\SplashScreen.scale-125.png" />
+        <Content Include="Images\SplashScreen.scale-150.png" />
+        <Content Include="Images\SplashScreen.scale-200.png" />
+        <Content Include="Images\SplashScreen.scale-400.png" />
+        <Content Include="Images\WideTile.scale-100.png" />
+        <Content Include="Images\WideTile.scale-125.png" />
+        <Content Include="Images\WideTile.scale-150.png" />
+        <Content Include="Images\WideTile.scale-200.png" />
+        <Content Include="Images\WideTile.scale-400.png" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="..\Homeschool.Net6.Shared\NewFolder\" />
+        <Folder Include="BrowserControl\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Client\Homeschool.Proxy\Homeschool.Proxy.csproj" />
+      <ProjectReference Include="..\Homeschool.DomainModels\Homeschool.DomainModels.csproj" />
     </ItemGroup>
 </Project>

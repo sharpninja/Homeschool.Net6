@@ -11,14 +11,28 @@ namespace Homeschool.App.Views;
 /// </summary>
 public sealed partial class Studydotcom : Page
 {
-    public Studydotcom()
+    public StudydotcomViewModel ViewModel
     {
+        get;
+    }
+
+    public Studydotcom(StudydotcomViewModel viewModel)
+    {
+        ViewModel = viewModel;
         InitializeComponent();
 
-
+        Loaded += async (sender, args) =>
+        {
+            await ViewModel.LoadLessonQueueAsync();
+        };
     }
 
     public void TodaysWork_Click(object sender, RoutedEventArgs args)
+    {
+        ViewModel.LoadLessonQueueAsync().GetAwaiter().GetResult();
+    }
+
+    private void Hyperlink_Click(Microsoft.UI.Xaml.Documents.Hyperlink sender, Microsoft.UI.Xaml.Documents.HyperlinkClickEventArgs args)
     {
 
     }

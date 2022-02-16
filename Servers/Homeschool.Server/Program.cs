@@ -3,44 +3,62 @@ using Homeschool.Data.Context;
 
 using Microsoft.EntityFrameworkCore;
 
-var builder = WebApplication.CreateBuilder(args);
-builder.WebHost.ConfigureKestrel(
-    static (context, options) =>
-    {
-        options.AllowSynchronousIO = true;
-    }
-);
-builder.Services
-    .AddSingleton(
-    provider =>
-    {
-        string cs = provider.GetRequiredService<IConfiguration>()["ConnectionString"];
+using IHost host = Host.CreateDefaultBuilder(args)
+    .UseWindowsService(
+        options =>
+        {
+            options.ServiceName = "Homeschool Service";
+        }
+    )
+    .ConfigureAppConfiguration(
+        builder =>
+        {
+            builder.AddJsonFile("appsettings.json", false);
+            builder.AddUserSecrets(typeof(GradesService).Assembly, true);
+        })
+    .ConfigureLogging(builder => builder.AddConsole())
+    .ConfigureServices(
+        services =>
+        {
+            services
+                .AddSingleton(
+                    provider =>
+                    {
+                        ILogger<GradesService> logger  = provider.GetService<ILogger<GradesService>>()!;
+                        HomeschoolContext context = provider.GetService<HomeschoolContext>()!;
 
-        return new DbContextOptionsBuilder<HomeschoolContext>().EnableDetailedErrors(true)
-            .UseSqlServer(
-                cs,
-                builder =>
+                        return new GradesService(logger, context);
+                    })
+                .AddSingleton(
+                    provider =>
+                    {
+                        string cs
+                            = provider.GetRequiredService<IConfiguration>()["ConnectionString"];
+
+                        return new DbContextOptionsBuilder<HomeschoolContext>()
+                            .EnableDetailedErrors(true)
+                            .UseSqlServer(
+                                cs,
+                                builder =>
+                                {
+                                }
+                            )
+                            .Options;
+                    }
+                )
+                .AddDbContext<HomeschoolContext>()
+                .AddServiceModelServices();
+
+            services.AddHostedService(
+                provider =>
                 {
-                }
-            )
-            .Options;
-    }
-)
-    .AddTransient<GradesService>()
-    .AddDbContext<HomeschoolContext>()
-    .AddServiceModelServices();
+                    GradesService gradesService = provider.GetService<GradesService>()!;
+                    ILogger<WindowsBackgroundService> logger = provider.GetService<ILogger<WindowsBackgroundService>>()!;
 
-var app = builder.Build();
+                    return new WindowsBackgroundService(gradesService, logger);
+                });
+        }
+    )
+    .Build();
 
-app.UseServiceModel(
-    builder =>
-    {
-        builder.AddService<GradesService>()
-            .AddServiceEndpoint<GradesService, IGradesService>(
-                new BasicHttpBinding(),
-                "/GradesService/basichttp"
-        );
-    }
-);
-
-app.Run();
+await host.RunAsync();

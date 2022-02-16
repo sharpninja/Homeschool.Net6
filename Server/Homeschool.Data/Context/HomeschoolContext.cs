@@ -11,6 +11,11 @@ namespace Homeschool.Data.Context
 {
     public partial class HomeschoolContext : DbContext
     {
+        public HomeschoolContext(DbContextOptions<HomeschoolContext> options)
+            : base(options)
+        {
+        }
+
         public virtual DbSet<HsChapter> HsChapters { get; set; } = null!;
         public virtual DbSet<HsCourse> HsCourses { get; set; } = null!;
         public virtual DbSet<HsGradebook> HsGradebooks { get; set; } = null!;

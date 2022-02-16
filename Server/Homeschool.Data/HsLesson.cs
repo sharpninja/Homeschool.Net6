@@ -39,6 +39,8 @@ namespace Homeschool.Data
         public int LessDisplayOrder { get; set; }
         [Column("less_skip_lesson")]
         public bool LessSkipLesson { get; set; }
+        [Column("less_marked_completed")]
+        public DateTime? LessMarkedCompleted { get; set; }
 
         [ForeignKey(nameof(LessChapUid))]
         [InverseProperty(nameof(HsChapter.HsLessons))]

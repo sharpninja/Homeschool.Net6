@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Extensions.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Homeschool.Net6;
 
@@ -12,10 +11,11 @@ using App = App.App;
 
 public static class Program
 {
-    [ STAThread ]
+    [STAThread]
     public static void Main(string[] args)
     {
-        var builder = new WindowsAppSdkHostBuilder<Homeschool.App.App>();
+        var builder =
+            new WindowsAppSdkHostBuilder<Homeschool.App.App>();
 
         builder.ConfigureServices(
             (_, collection) =>
@@ -23,31 +23,69 @@ public static class Program
                 collection.AddLogging(
                     loggingBuilder =>
                     {
-                        loggingBuilder.AddConsole()
-                            .AddDebug()
-                            .AddEventLog(
-                                settings =>
-                                {
-                                    settings.Filter = static (s, level) => level==LogLevel.Error;
-                                    settings.LogName = "Homeschool";
-                                    settings.SourceName = "Homeschool";
-                                }
-                            );
+                        loggingBuilder//.AddConsole()
+                            .AddDebug();
                     }
                 );
                 // If your main Window is named differently, change it here.
-                collection.AddSingleton<MainPage>()
-                    .AddSingleton<MainWindow>()
+                collection.AddSingleton<MainPage>(provider =>
+                    {
+                        var logger = provider.GetRequiredService<ILogger<MainPage>>();
+
+                        var viewModel = provider.GetRequiredService<MainViewModel>();
+
+                        try
+                        {
+                            logger.LogInformation("Creating MainPage");
+                            var mainPage = new MainPage(logger, viewModel);
+
+
+                            return mainPage;
+                        }
+                        catch (Exception ex)
+                        {
+                            if (logger is null)
+                            {
+                                throw new ApplicationException("Could not get ILogger<MainPage>");
+                            }
+                        }
+
+                        return null;
+                    })
+                    .AddSingleton<MainWindow>(
+                        provider =>
+                        {
+                            return new MainWindow(provider.GetRequiredService<MainPage>());
+                        }
+                    )
                     .AddSingleton<ResearchPage>()
-                    .AddSingleton<Studydotcom>();
+                    .AddSingleton<HomePage>()
+                    .AddSingleton<MainViewModel>()
+                    .AddSingleton<Studydotcom>(
+                        provider =>
+                        {
+                            return new Studydotcom(provider.GetRequiredService<StudydotcomViewModel>());
+                        }
+                    )
+                    .AddSingleton<StudydotcomViewModel>();
+
+                collection.AddTransient(
+                    provider =>
+                    {
+                        Homeschool.Proxy.Proxy proxy = new();
+                        proxy.Initialize(provider);
+
+                        return proxy;
+                    }
+                );
             }
         );
 
-        var app = builder.Build();
+        var host = builder.Build();
 
-        App.Services = app.Services;
+        App.Services = host.Services;
 
-        app.StartAsync()
+        host.StartAsync()
             .GetAwaiter()
             .GetResult();
     }

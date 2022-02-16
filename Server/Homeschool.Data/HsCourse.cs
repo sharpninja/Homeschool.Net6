@@ -36,6 +36,9 @@ namespace Homeschool.Data
         [Required]
         [Column("cour_enabled")]
         public bool? CourEnabled { get; set; }
+        [Column("cour_icon")]
+        [StringLength(50)]
+        public string? CourIcon { get; set; }
 
         [ForeignKey(nameof(CourSubjUid))]
         [InverseProperty(nameof(HsSubject.HsCourses))]

@@ -13,5 +13,8 @@
 
         [ OperationContract ]
         LessonQueueItem[]? GetLessonQueue(int? min, int? max);
+
+        [ OperationContract ]
+        LessonModel? MarkLessonCompleted(Guid lessonUid, DateTimeOffset timestamp);
     }
 }

@@ -35,3 +35,15 @@ global using Windows.Foundation;
 global using Microsoft.UI.Composition;
 
 global using Microsoft.UI.Xaml.Hosting;
+
+global using Homeschool.App.Views;
+
+global using WinRT;
+
+global using Homeschool.App.Controls;
+
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Logging;
+
+global using System.Collections.Concurrent;
+

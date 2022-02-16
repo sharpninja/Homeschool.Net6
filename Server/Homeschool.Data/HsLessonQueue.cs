@@ -12,10 +12,12 @@ namespace Homeschool.Data
         public Guid course_uid { get; set; }
         public Guid chapter_uid { get; set; }
         public Guid lesson_uid { get; set; }
+        public string course_icon { get; set; }
         public bool lesson_is_past_due { get; set; }
         public string course_title { get; set; }
         public string chapter_title { get; set; }
         public string lesson_title { get; set; }
         public string lesson_url { get; set; }
+        public DateTime? lesson_marked_completed { get; set; }
     }
 }

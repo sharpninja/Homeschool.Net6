@@ -14,21 +14,21 @@
         {
             this.Config = services.GetRequiredService<IConfiguration>()!;
 
-            this.Settings = ClientLogic.BuildClientSettings()!;
+            this.Settings = ClientLogic.BuildClientSettings(Config["ServiceHost"])!;
 
             this.Logger = services.GetService<ILogger<Proxy>>()!;
         }
 
-        public string? Test()
+        public async Task<string?> Test()
         {
             void Log(string value) => Logger.LogInformation(value);
 
             ClientLogic.SetLog(Log);
-            //var result = ClientLogic.GetGradesByParent(
+            //var result = ClientLogic.GetGradesByParentAsync(
             //    Guid.Parse("99F38BA7-2F27-41BE-85C2-BA2323B273B8"),
             //    GradesScopes.All);
 
-            var result = GetLessonQueue();
+            var result = await GetLessonQueueAsync();
 
             Log($"lesson: [{result}]");
 
@@ -41,13 +41,35 @@
                 return string.Join("\n", result.Select(r => r.ToString()));
         }
 
-        public LessonQueueItem[] GetLessonQueue(int? min = 7, int? max = 7)
+        public async Task<LessonQueueItem[]> GetLessonQueueAsync(int? min = 7, int? max = 7)
         {
-            void Log(string value)
-                => Logger.LogInformation(value);
+            void Log(string? value)
+            {
+                string msg = value ?? "<<null>>";
+                Logger.LogInformation(msg);
+            }
 
             ClientLogic.SetLog(Log);
-            var result = ClientLogic.GetLessonQueue(min, max);
+            var result = await ClientLogic.GetLessonQueueAsync(min, max);
+
+            Log($"lesson: [{result}]");
+
+            return result;
+        }
+
+        public Task<LessonModel?> MarkLessonCompleted(
+            Guid lessonUid,
+            DateTimeOffset timestamp
+        )
+        {
+            void Log(string? value)
+            {
+                string msg = value ?? "<<null>>";
+                Logger.LogInformation(msg);
+            }
+
+            ClientLogic.SetLog(Log);
+            var result = ClientLogic.MarkLessonCompleted(lessonUid, timestamp);
 
             Log($"lesson: [{result}]");
 

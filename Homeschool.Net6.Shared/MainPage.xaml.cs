@@ -1,35 +1,41 @@
-﻿
+﻿namespace Homeschool.App;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Homeschool.App;
-
-using System;
-
-using Controls;
-
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-
-using Views;
-
-/// <summary>
-/// An empty page that can be used on its own or navigated to within a Frame.
-/// </summary>
-public sealed partial class MainPage
+public sealed partial class MainPage : Page
 {
     public ILogger<MainPage> Logger
     {
         get;
+        private set;
     }
 
-    public IBrowserControlPage? Browser { get; set; }
-    public BrowserViewModel ViewModel => Browser?.ViewModel;
+    //public IBrowserControlPage? Browser { get; set; }
+    //public BrowserViewModel? ViewModel => Browser?.ViewModel;
 
-    public MainPage(ILogger<MainPage> logger)
+    public MainPage(ILogger<MainPage> logger, MainViewModel viewModel)
     {
         Logger = logger;
+        ViewModel = viewModel;
+        Logger.LogInformation("MainPage.ctor(): Entered.");
         InitializeComponent();
+
+        this.Loaded += (sender, args) =>
+        {
+            NavigationViewItem study = NavView.MenuItems.FirstOrDefault() as NavigationViewItem;
+
+            Logger.LogInformation($"{study}");
+
+            NavigateTo(study);
+        };
+        //NavView.
+        Logger.LogInformation("MainPage.ctor(): Left.");
+    }
+
+    public MainViewModel ViewModel
+    {
+        get;
+        set;
     }
 
     public void Frame_Navigated(object sender, NavigationEventArgs args)
@@ -50,11 +56,15 @@ public sealed partial class MainPage
         {
             return;
         }
+    }
 
+    private void NavigateTo(NavigationViewItem viewItem)
+    {
         FrameworkElement? target = viewItem.Tag switch
         {
-            nameof(Studydotcom) => App.Services.GetRequiredService<Studydotcom>(),
-            nameof(ResearchPage) => App.Services.GetRequiredService<ResearchPage>(),
+            nameof(Studydotcom) => App.Services!.GetRequiredService<Studydotcom>(),
+            nameof(ResearchPage) => App.Services!.GetRequiredService<ResearchPage>(),
+            nameof(HomePage) => App.Services!.GetRequiredService<HomePage>(),
             _ => null
         };
 
@@ -64,6 +74,26 @@ public sealed partial class MainPage
         }
 
         RootPane.Content = target;
-        NavView.HeaderTemplate = (DataTemplate)target.Resources["AppBarTemplate"];
+        //var resource = target.Resources["AppBarTemplate"];
+
+        //if (resource is AppBar header)
+        //{
+        //    this.As<Page>().TopAppBar = header;
+        //}
     }
+}
+
+[ObservableObject]
+public partial class MainViewModel
+{
+    private static MainViewModel? _instance = null;
+
+    [ObservableProperty]
+    protected string? status;
+
+    public MainViewModel()
+        => _instance = this;
+
+    public static void SetStatus(string newStatus)
+        => _instance!.Status = $"{DateTime.Now:t}: {newStatus}";
 }

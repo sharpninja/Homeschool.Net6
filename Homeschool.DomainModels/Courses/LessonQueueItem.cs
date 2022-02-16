@@ -1,14 +1,18 @@
 ﻿namespace Homeschool.DomainModels.Courses;
 
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+
 using Data;
 
-public record LessonQueueItem
+[ObservableObject]
+public partial class LessonQueueItem
 {
-    public LessonQueueItem() : this(new HsLessonQueue())
+    public LessonQueueItem() : this(new HsLessonQueue(), 0)
     {
     }
 
-    public LessonQueueItem(HsLessonQueue item)
+    public LessonQueueItem(HsLessonQueue item, int index)
     {
         CourseUid = item.course_uid;
         ChapterUid = item.chapter_uid;
@@ -18,14 +22,49 @@ public record LessonQueueItem
         ChapterTitle = item.chapter_title;
         LessonTitle = item.lesson_title;
         LessonUrl = item.lesson_url;
+        CourseIcon = $"/Assets/{item.course_icon}";
+        MarkedCompleteDateTime = item.lesson_marked_completed;
+        Index = index;
     }
 
-    public Guid CourseUid { get; init; }
-    public Guid ChapterUid { get; init; }
-    public Guid LessonUid { get; init; }
-    public bool LessonIsPastDue { get; init; }
-    public string CourseTitle { get; init; }
-    public string ChapterTitle { get; init; }
-    public string LessonTitle { get; init; }
-    public string LessonUrl { get; init; }
+    [ ObservableProperty ]
+    protected int index;
+
+    [ ObservableProperty ]
+    protected string courseIcon;
+
+    [ ObservableProperty ]
+    protected Guid courseUid;
+
+    [ ObservableProperty ]
+    protected Guid chapterUid;
+
+    [ ObservableProperty ]
+    protected Guid lessonUid;
+
+    [ ObservableProperty ]
+    protected bool lessonIsPastDue;
+
+    [ ObservableProperty ]
+    protected string courseTitle;
+
+    [ ObservableProperty ]
+    protected string chapterTitle;
+
+    [ ObservableProperty ]
+    protected string lessonTitle;
+
+    [ ObservableProperty ]
+    protected string lessonUrl;
+
+    [ ObservableProperty, AlsoNotifyChangeFor(nameof(MarkedCompleteDateTimeFormatted)),
+    AlsoNotifyChangeFor(nameof(Visibility))]
+    protected DateTimeOffset? markedCompleteDateTime;
+
+    public string MarkedCompleteDateTimeFormatted
+        => $"{markedCompleteDateTime?.LocalDateTime.ToShortTimeString()}";
+
+    public bool Visibility => courseUid != Guid.Empty &&
+                              (markedCompleteDateTime is null ||
+                              markedCompleteDateTime == DateTimeOffset.MinValue);
 }

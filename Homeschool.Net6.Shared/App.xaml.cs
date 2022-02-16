@@ -97,43 +97,38 @@ public sealed partial class App    : Application
         ThemeHelper.Initialize();
     }
 
-    // ReSharper disable once UnusedParameter.Local
-    private static void UpdateNavigationBasedOnSelectedPage(Frame rootFrame)
-    {
-    }
-
     public static IServiceProvider? Services { get; set; }
 
-    [SuppressMessage("Compatibility", "Uno0001:Uno type or member is not implemented", Justification = "<Pending>")]
-    private Frame GetRootFrame()
-    {
-        Frame rootFrame=null;
-        var windowContent = _window?.Content;
-        if (windowContent is not MainPage rootPage)
-        {
-            rootPage = Services?.GetRequiredService<MainPage>() ?? new MainPage(Services.GetService<ILogger<MainPage>>());
-            //rootFrame = rootPage.RootPane;
-            rootFrame ??= new Frame();
+    //[SuppressMessage("Compatibility", "Uno0001:Uno type or member is not implemented", Justification = "<Pending>")]
+    //private ContentPresenter GetRootFrame()
+    //{
+    //    ContentPresenter rootFrame =null;
+    //    var windowContent = _window?.Content;
+    //    if (windowContent is not MainPage rootPage)
+    //    {
+    //        rootPage = Services?.GetRequiredService<MainPage>() ?? new MainPage(Services.GetService<ILogger<MainPage>>());
+    //        //rootFrame = rootPage.RootPane;
+    //        rootFrame ??= new Frame();
 
-            //SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
-            rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
-            rootFrame.NavigationFailed += OnNavigationFailed;
-        }
-        else
-        {
-            rootFrame = rootPage.RootPane; //rootPage.RootPane;
-        }
+    //        //SuspensionManager.RegisterFrame(rootFrame, "AppFrame");
+    //        rootFrame.Language = Windows.Globalization.ApplicationLanguages.Languages[0];
+    //        rootFrame.NavigationFailed += OnNavigationFailed;
+    //    }
+    //    else
+    //    {
+    //        rootFrame = rootPage.RootPane; //rootPage.RootPane;
+    //    }
 
-        return rootFrame;
-    }
+    //    return rootFrame;
+    //}
 
-    /// <summary>
-    /// Invoked when Navigation to a certain page fails
-    /// </summary>
-    /// <param name="sender">The Frame which failed navigation</param>
-    /// <param name="e">Details about the navigation failure</param>
-    void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
-    {
-        throw new("Failed to load Page " + e.SourcePageType.FullName);
-    }
+//    /// <summary>
+//    /// Invoked when Navigation to a certain page fails
+//    /// </summary>
+//    /// <param name="sender">The Frame which failed navigation</param>
+//    /// <param name="e">Details about the navigation failure</param>
+//    void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+//    {
+//        throw new("Failed to load Page " + e.SourcePageType.FullName);
+//    }
 }

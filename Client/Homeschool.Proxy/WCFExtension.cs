@@ -55,7 +55,7 @@ public static class WCFExtension
     }
 
 
-    public static TResult WcfInvoke<TContract, TResult>(this ChannelFactory<TContract> factory, Func<TContract, TResult> action)
+    public static Task<TResult> WcfInvokeAsync<TContract, TResult>(this ChannelFactory<TContract> factory, Func<TContract, TResult> action)
     {
         TContract client = factory.CreateChannel();
 
@@ -66,11 +66,12 @@ public static class WCFExtension
 
         IClientChannel clientInstance = (IClientChannel)client;
 
+        TResult? result = default;
         try
         {
-            TResult result = action(client);
+            result = action(client);
             clientInstance.Close();
-            return result;
+            return Task.FromResult<TResult>(result!);
         }
         catch (CommunicationException)
         {
@@ -84,18 +85,19 @@ public static class WCFExtension
         }
     }
 
-    public static TResult WcfInvoke<TContract, TResult>(this Func<TContract, TResult> wcfAction,
+    public static Task<TResult> WcfInvokeAsync<TContract, TResult>(this Func<TContract, TResult> wcfAction,
         Binding binding, Uri url, Action<ChannelFactory<TContract>>? factorySetup = null)
     {
         binding.ApplyDebugTimeouts();
 
-        var factory = new ChannelFactory<TContract>(binding, new EndpointAddress(url));
+        var factory = new ChannelFactory<TContract>(
+            binding, new EndpointAddress(url));
         factorySetup?.Invoke(factory);
 
         factory.Open();
         try
         {
-            return factory.WcfInvoke(wcfAction);
+            return factory?.WcfInvokeAsync(wcfAction);
         }
         finally
         {

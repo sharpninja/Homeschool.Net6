@@ -19,67 +19,77 @@ internal static class ClientLogic
     public static void SetLog(Action<string>? log)
         => Log = log;
 
-    public static Settings BuildClientSettings()
+    public static Settings BuildClientSettings(string? hostname = null)
     {
         const string HOSTNAME = "LOCALHOST";
 
         Settings settings = new Settings().SetDefaults(
-            HOSTNAME, "GradesService");
+            hostname ?? HOSTNAME, "GradesService");
 
         return settings;
     }
 
-    public static AssessmentGrade[]? GetGradesByParent(Guid parent, GradesScopes scope)
+    public static async Task<AssessmentGrade[]?> GetGradesByParentAsync(Guid parent, GradesScopes scope)
     {
-        var getGradesByParent = (Func<Homeschool.Server.IGradesService, AssessmentGrade[]?>)(channel
-            => channel.GetGradesByParent(
-                parent,
-                scope
-            ));
+        var getGradesByParent =
+            (Func<Homeschool.Server.IGradesService, AssessmentGrade[]?>)(
+                channel => channel.GetGradesByParent(parent, scope));
 
-        AssessmentGrade[]? result = Array.Empty<AssessmentGrade>();
-        Log?.Invoke(
-            $"BasicHttp: GetGradesByParent(parent: {parent}, scope: {scope}) => " +
-            (result = getGradesByParent.WcfInvoke(
-                new BasicHttpBinding(BasicHttpSecurityMode.None),
-                Settings.BasicHttpAddress!
-            ))
-        );
+        var binding = new BasicHttpBinding(BasicHttpSecurityMode.None);
+
+        AssessmentGrade[]? result =
+            await getGradesByParent.WcfInvokeAsync(binding, Settings.BasicHttpAddress!);
+
+        Log?.Invoke($"BasicHttp: GetGradesByParentAsync(parent: {parent}, scope: {scope}) => {result?.Length}");
 
         return result;
     }
 
-    public static LessonQueueItem[] GetLessonQueue(int? min = 7, int? max = 7)
+    public static async Task<LessonQueueItem[]> GetLessonQueueAsync(int? min = 7, int? max = 7)
     {
-        var getLessonQueue = (Func<Homeschool.Server.IGradesService, LessonQueueItem[]?>)(channel
-            => channel.GetLessonQueue(min, max));
+        var getLessonQueue
+            = (Func<Homeschool.Server.IGradesService, LessonQueueItem[]?>)(channel
+                => channel.GetLessonQueue(min, max));
 
-        LessonQueueItem[]? result = Array.Empty<LessonQueueItem>();
-        Log?.Invoke(
-            $"BasicHttp: GetLessonQueue(min: {min}, max: {max}) => " +
-            (result = getLessonQueue.WcfInvoke(
-                new BasicHttpBinding(BasicHttpSecurityMode.None),
-                Settings.BasicHttpAddress!
-            ))
-        );
+        var binding = new BasicHttpBinding(BasicHttpSecurityMode.None);
+
+        LessonQueueItem[]? result
+            = await getLessonQueue.WcfInvokeAsync(binding, Settings.BasicHttpAddress!);
+
+        Log?.Invoke($"BasicHttp: GetLessonQueueAsync(min: {min}, max: {max}) => {result?.Length}");
 
         return result ?? Array.Empty<LessonQueueItem>();
     }
 
-
-    public static AssessmentGrade[]? GetGradesByFilter(GradesFilter filter)
+    public static Task<LessonModel?> MarkLessonCompleted(Guid lessonUid, DateTimeOffset timestamp)
     {
-        var getGradesByFilter = (Func<Homeschool.Server.IGradesService, AssessmentGrade[]?>)(channel
-            => channel.GetGradesByFilter(filter));
+        var markLessonComplete
+            = (Func<Homeschool.Server.IGradesService, LessonModel?>)(channel
+                => channel.MarkLessonCompleted(lessonUid, timestamp));
 
-        AssessmentGrade[]? result = Array.Empty<AssessmentGrade>();
-        Log?.Invoke(
-            $"BasicHttp: GetGradesByFilter(filter: {filter}) => " +
-            (result = getGradesByFilter.WcfInvoke(
-                new BasicHttpBinding(BasicHttpSecurityMode.None),
-                Settings.BasicHttpAddress!
-            ))
+        var binding = new BasicHttpBinding(BasicHttpSecurityMode.None);
+
+        var result
+            = markLessonComplete.WcfInvokeAsync(binding, Settings.BasicHttpAddress!);
+
+        Log?.Invoke($"BasicHttp: MarkLessonCompleted(lessonUid: {lessonUid}, timestamp: {timestamp})");
+
+        return result;
+    }
+
+
+    public static async Task<AssessmentGrade[]?> GetGradesByFilter(GradesFilter filter)
+    {
+        var getGradesByFilter =
+            (Func<Homeschool.Server.IGradesService, AssessmentGrade[]?>)(
+                channel => channel.GetGradesByFilter(filter));
+
+        AssessmentGrade[]? result = await getGradesByFilter.WcfInvokeAsync(
+            new BasicHttpBinding(BasicHttpSecurityMode.None),
+            Settings.BasicHttpAddress!
         );
+
+        Log?.Invoke($"BasicHttp: GetGradesByFilter(filter: {filter}) => {result?.Length}");
 
         return result;
 
