@@ -38,7 +38,7 @@ public partial class StudydotcomViewModel
 
         MainViewModel.SetStatus($"Marked {NextLesson.LessonTitle} as Completed.");
 
-        NextLesson.MarkedCompleteDateTime = DateTime.UtcNow;
+        NextLesson.MarkedCompleteDateTime = DateTimeOffset.Now;
 
         Proxy service = App.Services!.GetRequiredService<Proxy>();
         var result = service.MarkLessonCompleted(

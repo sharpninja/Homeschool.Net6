@@ -5,21 +5,34 @@ using System.ServiceModel;
 
 using DomainModels.Courses;
 
-internal static class ClientLogic
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+
+public  class HomeschoolClientLogic
 {
-    static ClientLogic()
+    public ILogger<HomeschoolClientLogic> Logger
     {
-        Settings = BuildClientSettings();
+        get;
+    }
+
+    public HomeschoolClientLogic(IConfiguration config, ILogger<HomeschoolClientLogic> logger)
+    {
+        Logger = logger;
+        var hostName = config["ServiceHost"];
+
+        Logger.LogInformation($"hostName: {hostName}");
+
+        Settings = BuildClientSettings(hostName);
         Log = null;
     }
 
-    private static Settings Settings { get; }
-    private static Action<string>? Log { get; set; }
+    private  Settings Settings { get; }
+    private  Action<string>? Log { get; set; }
 
-    public static void SetLog(Action<string>? log)
+    public  void SetLog(Action<string>? log)
         => Log = log;
 
-    public static Settings BuildClientSettings(string? hostname = null)
+    public  Settings BuildClientSettings(string? hostname = null)
     {
         const string HOSTNAME = "LOCALHOST";
 
@@ -29,7 +42,7 @@ internal static class ClientLogic
         return settings;
     }
 
-    public static async Task<AssessmentGrade[]?> GetGradesByParentAsync(Guid parent, GradesScopes scope)
+    public  async Task<AssessmentGrade[]?> GetGradesByParentAsync(Guid parent, GradesScopes scope)
     {
         var getGradesByParent =
             (Func<Homeschool.Server.IGradesService, AssessmentGrade[]?>)(
@@ -45,7 +58,7 @@ internal static class ClientLogic
         return result;
     }
 
-    public static async Task<LessonQueueItem[]> GetLessonQueueAsync(int? min = 7, int? max = 7)
+    public  async Task<LessonQueueItem[]> GetLessonQueueAsync(int? min = 7, int? max = 7)
     {
         var getLessonQueue
             = (Func<Homeschool.Server.IGradesService, LessonQueueItem[]?>)(channel
@@ -61,7 +74,7 @@ internal static class ClientLogic
         return result ?? Array.Empty<LessonQueueItem>();
     }
 
-    public static Task<LessonModel?> MarkLessonCompleted(Guid lessonUid, DateTimeOffset timestamp)
+    public  Task<LessonModel?> MarkLessonCompleted(Guid lessonUid, DateTimeOffset timestamp)
     {
         var markLessonComplete
             = (Func<Homeschool.Server.IGradesService, LessonModel?>)(channel
@@ -78,7 +91,7 @@ internal static class ClientLogic
     }
 
 
-    public static async Task<AssessmentGrade[]?> GetGradesByFilter(GradesFilter filter)
+    public  async Task<AssessmentGrade[]?> GetGradesByFilter(GradesFilter filter)
     {
         var getGradesByFilter =
             (Func<Homeschool.Server.IGradesService, AssessmentGrade[]?>)(

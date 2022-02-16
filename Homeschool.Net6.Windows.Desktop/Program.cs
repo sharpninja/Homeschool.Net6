@@ -5,7 +5,10 @@ namespace Homeschool.Net6;
 using App;
 using App.Views;
 
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+
+using Proxy;
 
 using App = App.App;
 
@@ -17,6 +20,13 @@ public static class Program
         var builder =
             new WindowsAppSdkHostBuilder<Homeschool.App.App>();
 
+        builder.ConfigureAppConfiguration(
+            (context, configurationBuilder) =>
+            {
+                configurationBuilder.AddJsonFile("appsettings.json", false);
+                configurationBuilder.AddUserSecrets(typeof(MainPage).Assembly, true);
+            }
+        );
         builder.ConfigureServices(
             (_, collection) =>
             {
@@ -28,7 +38,9 @@ public static class Program
                     }
                 );
                 // If your main Window is named differently, change it here.
-                collection.AddSingleton<MainPage>(provider =>
+                collection
+                    .AddSingleton<HomeschoolClientLogic>()
+                    .AddSingleton<MainPage>(provider =>
                     {
                         var logger = provider.GetRequiredService<ILogger<MainPage>>();
 

@@ -10,11 +10,13 @@
 
     public class Proxy
     {
+        private HomeschoolClientLogic HomeschoolClientLogic { get; set; }
         public void Initialize(IServiceProvider services)
         {
+            HomeschoolClientLogic = services.GetRequiredService<HomeschoolClientLogic>();
             this.Config = services.GetRequiredService<IConfiguration>()!;
 
-            this.Settings = ClientLogic.BuildClientSettings(Config["ServiceHost"])!;
+            this.Settings = HomeschoolClientLogic.BuildClientSettings(Config["ServiceHost"])!;
 
             this.Logger = services.GetService<ILogger<Proxy>>()!;
         }
@@ -23,8 +25,8 @@
         {
             void Log(string value) => Logger.LogInformation(value);
 
-            ClientLogic.SetLog(Log);
-            //var result = ClientLogic.GetGradesByParentAsync(
+            HomeschoolClientLogic.SetLog(Log);
+            //var result = HomeschoolClientLogic.GetGradesByParentAsync(
             //    Guid.Parse("99F38BA7-2F27-41BE-85C2-BA2323B273B8"),
             //    GradesScopes.All);
 
@@ -49,8 +51,8 @@
                 Logger.LogInformation(msg);
             }
 
-            ClientLogic.SetLog(Log);
-            var result = await ClientLogic.GetLessonQueueAsync(min, max);
+            HomeschoolClientLogic.SetLog(Log);
+            var result = await HomeschoolClientLogic.GetLessonQueueAsync(min, max);
 
             Log($"lesson: [{result}]");
 
@@ -68,8 +70,8 @@
                 Logger.LogInformation(msg);
             }
 
-            ClientLogic.SetLog(Log);
-            var result = ClientLogic.MarkLessonCompleted(lessonUid, timestamp);
+            HomeschoolClientLogic.SetLog(Log);
+            var result = HomeschoolClientLogic.MarkLessonCompleted(lessonUid, timestamp);
 
             Log($"lesson: [{result}]");
 
