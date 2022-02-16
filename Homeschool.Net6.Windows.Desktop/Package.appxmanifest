@@ -4,16 +4,17 @@
         xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
         xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10"
         xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
-        IgnorableNamespaces="uap rescap">
+        xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
+        IgnorableNamespaces="uap rescap uap3">
 
     <Identity
             Name="84795384-D647-4796-92E7-1C79BD5BAB72"
             Publisher="O=The Sharp Ninja, C=US"
-            Version="1.0.0.0"/>
+            Version="1.0.3.0"/>
 
     <Properties>
-        <DisplayName>Homeschool.Net6</DisplayName>
-        <PublisherDisplayName>Homeschool.Net6</PublisherDisplayName>
+        <DisplayName>Homeschool Tool</DisplayName>
+        <PublisherDisplayName>The Sharp Ninja</PublisherDisplayName>
         <Logo>Images\PackageLogo.png</Logo>
     </Properties>
 
@@ -31,8 +32,8 @@
                      Executable="$targetnametoken$.exe"
                      EntryPoint="$targetentrypoint$">
             <uap:VisualElements
-                    DisplayName="Homeschool N6"
-                    Description="Homeschool.Net6"
+                    DisplayName="Homeschool"
+                    Description="Homeschool Tool"
                     Square150x150Logo="Images\MediumTile.png"
                     Square44x44Logo="Images\AppIcon.png" BackgroundColor="#a6a6a6">
                 <uap:DefaultTile Wide310x150Logo="Images\WideTile.png" Square71x71Logo="Images\SmallTile.png"
@@ -50,10 +51,14 @@
                     <uap:Rotation Preference="landscape"/>
                 </uap:InitialRotationPreference>
             </uap:VisualElements>
+            <uap:ApplicationContentUriRules>
+                <uap:Rule Type="include" Match="http://payton-desktop:5000/" WindowsRuntimeAccess="all"/>
+            </uap:ApplicationContentUriRules>
         </Application>
     </Applications>
 
     <Capabilities>
         <rescap:Capability Name="runFullTrust"/>
+        <Capability Name="internetClient"/>
     </Capabilities>
 </Package>

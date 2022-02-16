@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>net6.0-windows10.0.22000.0</TargetFramework>
-        <TargetPlatformMinVersion>10.0.22000.0</TargetPlatformMinVersion>
+        <TargetFramework>net6.0-windows10.0.19041.0</TargetFramework>
+        <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
         <RootNamespace>Homeschool.Net6</RootNamespace>
         <ApplicationManifest>app.manifest</ApplicationManifest>
         <Platforms>x86;x64;arm64</Platforms>
@@ -10,7 +10,7 @@
         <PublishProfile>win10-$(Platform).pubxml</PublishProfile>
         <UseWinUI>true</UseWinUI>
         <EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
-        <SupportedOSPlatformVersion>10.0.22000.0</SupportedOSPlatformVersion>
+        <SupportedOSPlatformVersion>10.0.19041.0</SupportedOSPlatformVersion>
         <PlatformTarget>x64</PlatformTarget>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -26,12 +26,12 @@
         <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
         <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
         <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-        <AppxPackageDir>C:\GitHub\Homeschool.Net6\Packages\</AppxPackageDir>
+        <AppxPackageDir>\\PAYTON-DESKTOP\Homeschool</AppxPackageDir>
         <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
         <GenerateTestArtifacts>True</GenerateTestArtifacts>
         <AppxBundle>Auto</AppxBundle>
         <AppxBundlePlatforms>x64</AppxBundlePlatforms>
-        <AppInstallerUri>\\payton-desktop\d%24</AppInstallerUri>
+        <AppInstallerUri>\\PAYTON-DESKTOP\Homeschool</AppInstallerUri>
         <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     </PropertyGroup>
     <ItemGroup>
