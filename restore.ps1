@@ -5,6 +5,10 @@ try {
     $projects += Get-ChildItem *.csproj -Path Server -Recurse
     $projects += Get-ChildItem *.csproj -Path Servers -Recurse
     $projects.FullName | ForEach-Object -Process { Set-Location (Split-path $_); & dotnet restore "$_" --configfile "$config"}
+
+    Pop-Location
+    Set-Location Servers
+    dotnet build Servers.sln --no-restore -c Debug
 }
 finally {
     Pop-Location
