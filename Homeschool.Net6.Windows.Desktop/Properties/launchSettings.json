@@ -8,6 +8,13 @@
     "AppSdkLauncher (Unpackaged)": {
       "commandName": "Project",
       "jsWebView2Debugging": true
+    },
+    "Remote": {
+      "commandName": "Project",
+      "remoteDebugEnabled": true,
+      "authenticationMode": "Windows",
+      "remoteDebugMachine": "jboo-desktop",
+      "nativeDebugging": true
     }
   }
 }

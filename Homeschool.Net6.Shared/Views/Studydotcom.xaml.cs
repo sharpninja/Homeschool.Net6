@@ -21,9 +21,9 @@ public sealed partial class Studydotcom : Page
         ViewModel = viewModel;
         InitializeComponent();
 
-        Loaded += async (sender, args) =>
+        Loaded += (sender, args) =>
         {
-            await ViewModel.LoadLessonQueueAsync();
+            ViewModel.LoadLessonQueueAsync();
         };
     }
 

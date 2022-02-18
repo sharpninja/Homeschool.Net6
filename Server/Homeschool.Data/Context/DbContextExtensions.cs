@@ -45,7 +45,7 @@ namespace Homeschool.Data.Context
                 this.connection = connection;
                 this.transaction = tran;
 
-                if (tran != null)
+                if (tran is not null)
                 {
                     this.Database.UseTransaction((tran as IInfrastructure<DbTransaction>).Instance);
                 }
@@ -53,7 +53,7 @@ namespace Homeschool.Data.Context
 
             protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             {
-                if (transaction != null)
+                if (transaction is not null)
                 {
                     optionsBuilder.UseSqlServer(connection);
                 }

@@ -1,10 +1,5 @@
 ﻿namespace Homeschool.Proxy;
 
-using System;
-using System.Diagnostics;
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-
 public static class WCFExtension
 {
     public static async Task<TResult> WcfInvokeAsync<TContract, TResult>(this ChannelFactory<TContract> factory, Func<TContract, Task<TResult>> action)
@@ -55,7 +50,9 @@ public static class WCFExtension
     }
 
 
-    public static Task<TResult> WcfInvokeAsync<TContract, TResult>(this ChannelFactory<TContract> factory, Func<TContract, TResult> action)
+    public static Task<TResult> WcfInvokeAsync<TContract, TResult>(
+        this ChannelFactory<TContract> factory,
+        Func<TContract, TResult> action)
     {
         TContract client = factory.CreateChannel();
 
@@ -85,16 +82,20 @@ public static class WCFExtension
         }
     }
 
-    public static Task<TResult> WcfInvokeAsync<TContract, TResult>(this Func<TContract, TResult> wcfAction,
-        Binding binding, Uri url, Action<ChannelFactory<TContract>>? factorySetup = null)
+    public static Task<TResult> WcfInvokeAsync<TContract, TResult>(
+        this Func<TContract, TResult> wcfAction,
+        Binding binding,
+        Uri url,
+        Action<ChannelFactory<TContract>>? factorySetup = null
+    )
     {
         binding.ApplyDebugTimeouts();
 
-        var factory = new ChannelFactory<TContract>(
-            binding, new EndpointAddress(url));
+        var factory = new ChannelFactory<TContract>(binding, new EndpointAddress(url));
         factorySetup?.Invoke(factory);
 
         factory.Open();
+
         try
         {
             return factory?.WcfInvokeAsync(wcfAction);
@@ -105,19 +106,56 @@ public static class WCFExtension
         }
     }
 
+
+    // ReSharper disable once UnusedMember.Global
+    public static Task<TResult?> WcfInvokeAsync<TContract, TResult>(
+        this WcfDelegate<TContract, TResult> wcfAction,
+        Binding binding,
+        Uri url,
+        Action<ChannelFactory<TContract>>? factorySetup = null,
+        params string[] parms
+    )
+    {
+        binding.ApplyDebugTimeouts();
+
+        var factory = new ChannelFactory<TContract>(
+            binding,
+            new EndpointAddress(url));
+
+        factorySetup?.Invoke(factory);
+
+        factory.Open();
+
+        try
+        {
+            TResult? Function(TContract contract)
+                => wcfAction(contract, parms);
+
+            Task<TResult?>? result = factory?.WcfInvokeAsync(Function);
+
+            return result ?? Task.FromResult<TResult?>(default);
+        }
+        finally
+        {
+            factory?.Close();
+        }
+    }
+
     private static readonly TimeSpan s_debugTimeout = TimeSpan.FromMinutes(20);
 
     [Conditional("DEBUG")]
     public static void ApplyDebugTimeouts(this Binding binding, TimeSpan debugTimeout = default)
     {
-        if (Debugger.IsAttached)
+        if (!Debugger.IsAttached)
         {
-            debugTimeout = default == debugTimeout ? WCFExtension.s_debugTimeout : debugTimeout;
-            binding.OpenTimeout =
-                binding.CloseTimeout =
-                binding.SendTimeout =
-                binding.ReceiveTimeout = debugTimeout;
+            return;
         }
+
+        debugTimeout = default == debugTimeout ? WCFExtension.s_debugTimeout : debugTimeout;
+        binding.OpenTimeout =
+            binding.CloseTimeout =
+                binding.SendTimeout =
+                    binding.ReceiveTimeout = debugTimeout;
     }
 
 }

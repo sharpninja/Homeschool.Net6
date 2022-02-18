@@ -1,7 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Homeschool.Data.Context;
-
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,10 +26,10 @@ builder.ConfigureServices(
         collection.AddTransient(
             provider =>
             {
-                Homeschool.Proxy.Proxy proxy = new();
-                proxy.Initialize(provider);
+                Homeschool.Proxy.WcfProxy wcfProxy = new();
+                wcfProxy.Initialize(provider);
 
-                return proxy;
+                return wcfProxy;
             }
         );
     }
@@ -43,7 +41,7 @@ const int DELAY = 3;
 Console.WriteLine($"Waiting {DELAY} seconds.");
 await Task.Delay(TimeSpan.FromSeconds(DELAY));
 Console.WriteLine("Starting proxy.");
-var proxy = host.Services.GetService<Homeschool.Proxy.Proxy>()!;
+var proxy = host.Services.GetService<Homeschool.Proxy.WcfProxy>()!;
 
 Console.WriteLine("Invoking proxy.");
 var result = proxy.Test();

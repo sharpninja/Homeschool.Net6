@@ -1,7 +1,6 @@
 ﻿namespace Homeschool.DomainModels.Courses;
 
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 
 using Data;
 

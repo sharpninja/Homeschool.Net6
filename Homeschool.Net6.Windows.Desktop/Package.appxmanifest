@@ -10,7 +10,7 @@
     <Identity
             Name="84795384-D647-4796-92E7-1C79BD5BAB72"
             Publisher="O=The Sharp Ninja, C=US"
-            Version="1.0.3.0"/>
+            Version="1.0.4.0"/>
 
     <Properties>
         <DisplayName>Homeschool Tool</DisplayName>

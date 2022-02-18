@@ -30,6 +30,7 @@
     <_Globbed_Compile Remove="Helper\NavigationHelper.cs" />
     <_Globbed_Compile Remove="Helper\NavigationOrientationHelper.cs" />
     <_Globbed_Compile Remove="Helper\ProtocolActivationClipboardHelper.cs" />
+    <_Globbed_Compile Remove="Helper\SettingsViewModel.cs" />
     <_Globbed_Compile Remove="Helper\ThemeHelper.cs" />
     <_Globbed_Compile Remove="Helper\UIHelper.cs" />
     <_Globbed_Compile Remove="ItemPage.xaml.cs" />

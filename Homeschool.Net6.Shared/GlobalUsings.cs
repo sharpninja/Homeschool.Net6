@@ -42,8 +42,13 @@ global using WinRT;
 
 global using Homeschool.App.Controls;
 
+global using Homeschool.App.Helper;
+
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.Logging;
 
 global using System.Collections.Concurrent;
 
+global using Windows.Storage;
+global using Windows.Storage.Pickers;
+global using Windows.UI.ViewManagement;

@@ -1,6 +1,5 @@
 namespace Homeschool.Server;
 
-using Data;
 using Data.Context;
 
 using DomainModels.Courses;

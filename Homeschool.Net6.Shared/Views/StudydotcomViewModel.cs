@@ -7,12 +7,21 @@ using DomainModels.Courses;
 
 using Proxy;
 
-using System.Collections.Immutable;
-using System.Diagnostics;
+using System.Reflection;
 
 [ObservableObject]
 public partial class StudydotcomViewModel
 {
+    public ILogger<StudydotcomViewModel> Logger
+    {
+        get;
+    }
+
+    public WcfProxy WcfProxy
+    {
+        get;
+    }
+
     [ObservableProperty]
     protected List<LessonQueueItem> _lessonQueue = new();
 
@@ -28,6 +37,12 @@ public partial class StudydotcomViewModel
         MarkedCompleteDateTime = DateTimeOffset.MinValue
     };
 
+    public StudydotcomViewModel(ILogger<StudydotcomViewModel> logger, WcfProxy wcfProxy)
+    {
+        Logger = logger;
+        WcfProxy = wcfProxy;
+    }
+
     [ICommand]
     public void MarkCompleted()
     {
@@ -40,8 +55,8 @@ public partial class StudydotcomViewModel
 
         NextLesson.MarkedCompleteDateTime = DateTimeOffset.Now;
 
-        Proxy service = App.Services!.GetRequiredService<Proxy>();
-        var result = service.MarkLessonCompleted(
+
+        var result = WcfProxy.MarkLessonCompleted(
             NextLesson.LessonUid,
             NextLesson.MarkedCompleteDateTime.Value
         ).GetAwaiter().GetResult();
@@ -76,35 +91,60 @@ public partial class StudydotcomViewModel
 
     public async Task<bool> LoadLessonQueueAsync()
     {
-        Proxy service = App.Services!.GetRequiredService<Proxy>();
-        LessonQueueItem[]? results = await service.GetLessonQueueAsync();
-
-        if (results is null
-            or
-            {
-                Length: 0
-            })
+        //if (Debugger.IsAttached)
+        //{
+        //    Debugger.Break();
+        //}
+        Task<LessonQueueItem[]?> GetLessonQueueAsync()
         {
-            return false;
+            try
+            {
+                Task<LessonQueueItem[]?> result = WcfProxy.GetLessonQueueAsync();
+
+                return result;
+            }
+            catch (AggregateException ae)
+            {
+                throw ae.InnerException;
+            }
         }
 
-        _completedLessons.Clear();
-        LessonQueue = _incompleteLessons =
-            results
-                .OrderBy(
+        try
+        {
+            LessonQueueItem[]? results = await GetLessonQueueAsync();
+
+            if (results is null
+                or
+                {
+                    Length: 0
+                })
+            {
+                return false;
+            }
+
+            _completedLessons.Clear();
+            LessonQueue = _incompleteLessons = results.OrderBy(
                     i => (i.MarkedCompleteDateTime is null ||
                           i.MarkedCompleteDateTime == DateTimeOffset.MinValue)
-                    ? 0
-                    : 1
+                        ? 0
+                        : 1
                 )
                 .ThenBy(i => i.Index)
                 .ToList();
 
-        SetNextLesson();
+            SetNextLesson();
 
-        MainViewModel.SetStatus($"Loaded {LessonQueue.Count} Queued Lessons.");
+            MainViewModel.SetStatus($"Loaded {LessonQueue.Count} Queued Lessons.");
 
-        return true;
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, MethodBase.GetCurrentMethod().Name);
+            MainViewModel.SetStatus(ex.Message);
+        }
+
+        return false;
     }
 
     private void SetNextLesson()

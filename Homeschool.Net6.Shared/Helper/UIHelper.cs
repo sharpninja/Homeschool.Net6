@@ -2,14 +2,10 @@ namespace Homeschool.App.Helper;
 
 using System.Collections.Generic;
 
-using Windows.Storage;
-
 using Microsoft.UI.Xaml.Media;
 
-public static class UiHelper
+public static class UIHelper
 {
-    public static bool IsScreenshotMode { get; set; }
-    public static StorageFolder ScreenshotStorageFolder { get; set; } = ApplicationData.Current.LocalFolder;
 
     public static IEnumerable<T> GetDescendantsOfType<T>(this DependencyObject start) where T : DependencyObject
         => start.GetDescendants().OfType<T>();

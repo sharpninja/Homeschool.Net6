@@ -24,10 +24,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Data\ControlInfoDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GlobalUsings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\ProtocolActivationClipboardHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\SettingsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\ThemeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\UIHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Views\ResearchPage.xaml.cs">
       <DependentUpon>ResearchPage.xaml</DependentUpon>
@@ -59,6 +63,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Views\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -84,7 +92,15 @@
 		 explicitly included in the projitem, so files can be added from vscode
 		 without manipulating the projitem file.
 	-->
+    <Content Include="$(MSBuildThisFileDirectory)Assets\english.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\good-job.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\history.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\humanities.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\license\license.html" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\math.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\science.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\studycom.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\technology.png" />
     <_Globbled_Page Include="$(MSBuildThisFileDirectory)**/*.xaml" Exclude="@(Page);@(ApplicationDefinition)">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

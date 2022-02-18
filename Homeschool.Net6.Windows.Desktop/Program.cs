@@ -1,16 +1,6 @@
-﻿using CommunityToolkit.Extensions.Hosting;
+﻿namespace Homeschool.Net6;
 
-namespace Homeschool.Net6;
-
-using App;
-using App.Views;
-
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-
-using Proxy;
-
-using App = App.App;
+using App = Homeschool.App.App;
 
 public static class Program
 {
@@ -24,6 +14,10 @@ public static class Program
             (context, configurationBuilder) =>
             {
                 configurationBuilder.AddJsonFile("appsettings.json", false);
+                configurationBuilder.AddJsonFile(
+                    WcfSettings.GetSettingsFilename(
+                        Windows.Storage.ApplicationData.Current.LocalFolder.Path),
+                    true);
                 configurationBuilder.AddUserSecrets(typeof(MainPage).Assembly, true);
             }
         );
@@ -40,6 +34,9 @@ public static class Program
                 // If your main Window is named differently, change it here.
                 collection
                     .AddSingleton<HomeschoolClientLogic>()
+                    .AddSingleton<PathName>(
+                        provider => new(Windows.Storage.ApplicationData.Current.LocalFolder.Path)
+                    )
                     .AddSingleton<MainPage>(provider =>
                     {
                         var logger = provider.GetRequiredService<ILogger<MainPage>>();
@@ -62,7 +59,7 @@ public static class Program
                             }
                         }
 
-                        return null;
+                        throw new ApplicationException("Could not create an instance of MainPage");
                     })
                     .AddSingleton<MainWindow>(
                         provider =>
@@ -70,7 +67,12 @@ public static class Program
                             return new MainWindow(provider.GetRequiredService<MainPage>());
                         }
                     )
+                    .AddTransient<HomeschoolClientLogic>()
+                    .AddTransient<WcfProxy>()
+                    .AddTransient<WcfSettings>()
                     .AddSingleton<ResearchPage>()
+                    .AddSingleton<SettingsViewModel>()
+                    .AddSingleton<SettingsPage>()
                     .AddSingleton<HomePage>()
                     .AddSingleton<MainViewModel>()
                     .AddSingleton<Studydotcom>(
@@ -80,16 +82,6 @@ public static class Program
                         }
                     )
                     .AddSingleton<StudydotcomViewModel>();
-
-                collection.AddTransient(
-                    provider =>
-                    {
-                        Homeschool.Proxy.Proxy proxy = new();
-                        proxy.Initialize(provider);
-
-                        return proxy;
-                    }
-                );
             }
         );
 

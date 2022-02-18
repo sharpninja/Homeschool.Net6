@@ -26,12 +26,12 @@
         <GenerateAppInstallerFile>True</GenerateAppInstallerFile>
         <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
         <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-        <AppxPackageDir>\\PAYTON-DESKTOP\Homeschool</AppxPackageDir>
+        <AppxPackageDir>\\JBOO-DESKTOP\Homeschool</AppxPackageDir>
         <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
         <GenerateTestArtifacts>True</GenerateTestArtifacts>
         <AppxBundle>Auto</AppxBundle>
         <AppxBundlePlatforms>x64</AppxBundlePlatforms>
-        <AppInstallerUri>\\PAYTON-DESKTOP\Homeschool</AppInstallerUri>
+        <AppInstallerUri>\\JBOO-DESKTOP\Homeschool\updates</AppInstallerUri>
         <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
     </PropertyGroup>
     <ItemGroup>
@@ -40,18 +40,12 @@
     <ItemGroup>
         <None Remove="appsettings.Development.json" />
         <None Remove="appsettings.json" />
-        <None Remove="Assets\english.png" />
-        <None Remove="Assets\history.png" />
-        <None Remove="Assets\humanities.png" />
         <None Remove="Assets\LockScreenLogo.scale-200.png" />
-        <None Remove="Assets\math.png" />
-        <None Remove="Assets\science.png" />
         <None Remove="Assets\SplashScreen.scale-200.png" />
         <None Remove="Assets\Square150x150Logo.scale-200.png" />
         <None Remove="Assets\Square44x44Logo.scale-200.png" />
         <None Remove="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
         <None Remove="Assets\StoreLogo.png" />
-        <None Remove="Assets\technology.png" />
         <None Remove="Assets\Wide310x150Logo.scale-200.png" />
         <None Remove="BrowserControl\BrowserControlWebView2.xaml" />
         <None Remove="Images\AppIcon.scale-100.png" />
@@ -134,6 +128,7 @@
         <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
         <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.8" />
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
         <PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
         <PackageReference Include="Uno.WinUI" Version="4.0.13" />
     </ItemGroup>
@@ -157,18 +152,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <_Globbed_Content Remove="Assets\english.png" />
-        <_Globbed_Content Remove="Assets\history.png" />
-        <_Globbed_Content Remove="Assets\humanities.png" />
         <_Globbed_Content Remove="Assets\LockScreenLogo.scale-200.png" />
-        <_Globbed_Content Remove="Assets\math.png" />
-        <_Globbed_Content Remove="Assets\science.png" />
         <_Globbed_Content Remove="Assets\SplashScreen.scale-200.png" />
         <_Globbed_Content Remove="Assets\Square150x150Logo.scale-200.png" />
         <_Globbed_Content Remove="Assets\Square44x44Logo.scale-200.png" />
         <_Globbed_Content Remove="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
         <_Globbed_Content Remove="Assets\StoreLogo.png" />
-        <_Globbed_Content Remove="Assets\technology.png" />
         <_Globbed_Content Remove="Assets\Wide310x150Logo.scale-200.png" />
     </ItemGroup>
 

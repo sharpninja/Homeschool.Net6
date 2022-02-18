@@ -166,7 +166,7 @@ public sealed class ControlInfoDataSource
     public async Task<ControlInfoDataGroup> GetGroupFromItemAsync(string uniqueId)
     {
         await ControlInfoDataSource._instance.GetControlInfoDataAsync().ConfigureAwait(false);
-        var matches = ControlInfoDataSource._instance.Groups.Where((group) => group.Items.FirstOrDefault(item => item.UniqueId.Equals(uniqueId)) != null);
+        var matches = ControlInfoDataSource._instance.Groups.Where((group) => group.Items.FirstOrDefault(item => item.UniqueId.Equals(uniqueId)) is not null);
         if (matches.Count() == 1)
         {
             return matches.First();

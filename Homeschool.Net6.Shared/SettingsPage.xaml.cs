@@ -7,25 +7,13 @@
 // PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.
 //
 //*********************************************************
-using Homeschool.App.Common;
-using Homeschool.App.Helper;
+
 //using Microsoft.Graphics.Canvas.Effects;
-using System.Linq;
-using Windows.ApplicationModel.Core;
-using Windows.Storage;
-using Windows.Storage.Pickers;
-using Windows.System;
-using Windows.UI;
-using Windows.UI.ViewManagement;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Navigation;
 
 namespace Homeschool.App
 {
     /// <summary>
-    /// A page that displays the app's settings.
+    /// A page that displays the app's wcfSettings.
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
@@ -34,12 +22,13 @@ namespace Homeschool.App
             get
             {
                 var version = Windows.ApplicationModel.Package.Current.Id.Version;
-                return string.Format("{0}.{1}.{2}.{3}", version.Major, version.Minor, version.Build, version.Revision);
+                return $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
             }
         }
 
-        public SettingsPage()
+        public SettingsPage(SettingsViewModel viewModel)
         {
+            ViewModel = viewModel;
             this.InitializeComponent();
             Loaded += OnSettingsPageLoaded;
 
@@ -47,40 +36,38 @@ namespace Homeschool.App
                 soundToggle.IsOn = true;
             if (ElementSoundPlayer.SpatialAudioMode == ElementSpatialAudioMode.On)
                 spatialSoundBox.IsChecked = true;
-            //if (NavigationRootPage.Current.NavigationView.PaneDisplayMode == Microsoft.UI.Xaml.Controls.NavigationViewPaneDisplayMode.Auto)
-            //{
-            //    navigationLocation.SelectedIndex = 0;
-            //}
-            //else
-            //{
-            //    navigationLocation.SelectedIndex = 1;
-            //}
 
-            screenshotModeToggle.IsOn = UIHelper.IsScreenshotMode;
-            screenshotFolderLinkContent.Text = UIHelper.ScreenshotStorageFolder.Path;
+            screenshotModeToggle.IsOn = ViewModel.IsScreenshotMode;
+            screenshotFolderLinkContent.Text = ViewModel.ScreenshotStorageFolderPath;
+        }
+
+        public SettingsViewModel ViewModel
+        {
+            get;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            //NavigationRootPage.Current.NavigationView.Header = "Settings";
+            //NavigationRootPage.Current.NavigationView.Header = "WcfSettings";
         }
 
         private void OnSettingsPageLoaded(object sender, RoutedEventArgs e)
         {
             var currentTheme = ThemeHelper.RootTheme.ToString();
-            (ThemePanel.Children.Cast<RadioButton>().FirstOrDefault(c => c?.Tag?.ToString() == currentTheme)).IsChecked = true;
+            (ThemePanel.Children.Cast<RadioButton>()
+                .FirstOrDefault(c => c?.Tag?.ToString() == currentTheme)).IsChecked = true;
         }
 
         private void OnThemeRadioButtonChecked(object sender, RoutedEventArgs e)
         {
             var selectedTheme = ((RadioButton)sender)?.Tag?.ToString();
-            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            //ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
 
-            if (selectedTheme != null)
+            if (selectedTheme is not null)
             {
-                ThemeHelper.RootTheme = App.GetEnum<ElementTheme>(selectedTheme);
+                ThemeHelper.RootTheme = App.GetEnum<ApplicationTheme>(selectedTheme);
             }
         }
 
@@ -116,14 +103,9 @@ namespace Homeschool.App
             }
         }
 
-        private void navigationToggle_Toggled(object sender, RoutedEventArgs e)
-        {
-            NavigationOrientationHelper.IsLeftMode = navigationLocation.SelectedIndex == 0;
-        }
-
         private void screenshotModeToggle_Toggled(object sender, RoutedEventArgs e)
         {
-            UIHelper.IsScreenshotMode = screenshotModeToggle.IsOn;
+            ViewModel.IsScreenshotMode = screenshotModeToggle.IsOn;
         }
 
         private void spatialSoundBox_Unchecked(object sender, RoutedEventArgs e)
@@ -134,38 +116,37 @@ namespace Homeschool.App
             }
         }
 
-        private void navigationLocation_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            NavigationOrientationHelper.IsLeftMode = navigationLocation.SelectedIndex == 0;
-        }
-
         private async void FolderButton_Click(object sender, RoutedEventArgs e)
         {
-            FolderPicker folderPicker = new FolderPicker();
+            var folderPicker = new FolderPicker();
+
+            // Get the current window's HWND by passing in the Window object
+            var hwnd = WinRT.Interop.WindowNative.GetWindowHandle(App.Current.Window);
+
+            // Associate the HWND with the file picker
+            WinRT.Interop.InitializeWithWindow.Initialize(folderPicker, hwnd);
+
             folderPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
             folderPicker.FileTypeFilter.Add(".png"); // meaningless, but you have to have something
             StorageFolder folder = await folderPicker.PickSingleFolderAsync();
 
-            if (folder != null)
+            if (folder == null)
             {
-                UIHelper.ScreenshotStorageFolder = folder;
-                screenshotFolderLink.Content = UIHelper.ScreenshotStorageFolder.Path;
+                return;
             }
+
+            ViewModel.ScreenshotStorageFolderPath = folder.Path;
+            screenshotFolderLink.Content = ViewModel.ScreenshotStorageFolder;
         }
 
         private async void screenshotFolderLink_Click(object sender, RoutedEventArgs e)
         {
-            await Launcher.LaunchFolderAsync(UIHelper.ScreenshotStorageFolder);
+            await Launcher.LaunchFolderAsync(ViewModel.ScreenshotStorageFolder);
         }
 
         private void OnResetTeachingTipsButtonClick(object sender, RoutedEventArgs e)
         {
             ProtocolActivationClipboardHelper.ShowCopyLinkTeachingTip = true;
-        }
-
-        private void soundPageHyperlink_Click(Windows.UI.Xaml.Documents.Hyperlink sender, Windows.UI.Xaml.Documents.HyperlinkClickEventArgs args)
-        {
-            this.Frame.Navigate(typeof(ItemPage), "Sound");
         }
     }
 }

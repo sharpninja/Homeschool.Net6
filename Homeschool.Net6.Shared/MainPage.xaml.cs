@@ -2,6 +2,8 @@
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
+using Newtonsoft.Json;
+
 public sealed partial class MainPage : Page
 {
     public ILogger<MainPage> Logger
@@ -42,19 +44,27 @@ public sealed partial class MainPage : Page
     {
     }
 
+    private Newtonsoft.Json.JsonSerializerSettings Options { get; } = new()
+    {
+        MaxDepth = 2,
+        Formatting = Formatting.Indented,
+        TypeNameHandling = TypeNameHandling.Auto,
+        TypeNameAssemblyFormatHandling = TypeNameAssemblyFormatHandling.Simple,
+        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+        NullValueHandling = NullValueHandling.Include
+    };
+
     public void NavItem_Invoked(object sender, NavigationViewItemInvokedEventArgs args)
     {
-        Logger.LogInformation($"args: {args}");
+        Logger.LogInformation($"NavItem_Invoked: Entered.");
 
-        Logger.LogInformation($"args.InvokedItem: {args.InvokedItem}");
+        //var json = JsonConvert.SerializeObject(args, Options);
 
-        Logger.LogInformation($"args.IsSettingsInvoked: {args.IsSettingsInvoked}");
+        //Logger.LogInformation($"args:\n{json}");
 
-        Logger.LogInformation($"args.InvokedItemContainer: {args.InvokedItemContainer}");
-
-        if (args.InvokedItemContainer is not NavigationViewItem viewItem)
+        if (args.InvokedItemContainer is NavigationViewItem viewItem)
         {
-            return;
+            NavigateTo(viewItem);
         }
     }
 
@@ -65,7 +75,7 @@ public sealed partial class MainPage : Page
             nameof(Studydotcom) => App.Services!.GetRequiredService<Studydotcom>(),
             nameof(ResearchPage) => App.Services!.GetRequiredService<ResearchPage>(),
             nameof(HomePage) => App.Services!.GetRequiredService<HomePage>(),
-            _ => null
+            _ => App.Services!.GetRequiredService<SettingsPage>()
         };
 
         if (target is null)

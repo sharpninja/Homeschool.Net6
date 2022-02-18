@@ -6,9 +6,7 @@ using System.Reflection;
 using Helper;
 
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
-using Views;
 using LaunchActivatedEventArgs = Microsoft.UI.Xaml.LaunchActivatedEventArgs;
 
 /// <summary>
@@ -16,7 +14,9 @@ using LaunchActivatedEventArgs = Microsoft.UI.Xaml.LaunchActivatedEventArgs;
 /// </summary>
 public sealed partial class App    : Application
 {
-    private Window? _window;
+    internal Window? Window { get; private set; }
+
+    public new static App Current => Application.Current as App;
 
     /// <summary>
     /// Initializes the singleton Application object.  This is the first line of authored code
@@ -51,7 +51,7 @@ public sealed partial class App    : Application
             : ElementSpatialAudioMode.On;
     }
 
-    public static TEnum GetEnum<TEnum>([ NotNull ] string text) where TEnum : struct
+    public static TEnum GetEnum<TEnum>([ NotNull ] string? text) where TEnum : struct
     {
         if (text is null)
         {
@@ -84,15 +84,17 @@ public sealed partial class App    : Application
 
     private async Task EnsureWindow(LaunchActivatedEventArgs args)
     {
-        if ((_window ??= Window.Current) is null)
+        if (Window is null)
         {
             var assembly = Assembly.GetEntryAssembly();
             var mainWindowType = assembly.GetType("Homeschool.Net6.MainWindow", true, true);
-            _window = (Window)Services?.GetService(mainWindowType);
-            _window?.Activate();
+            Window = (Window)Services?.GetService(mainWindowType);
+            Window?.Activate();
         }
 
-        ThemeHelper._currentApplicationWindow = _window;
+        Window!.Title = "Homeschool";
+
+        ThemeHelper._currentApplicationWindow = Window;
 
         ThemeHelper.Initialize();
     }
@@ -103,7 +105,7 @@ public sealed partial class App    : Application
     //private ContentPresenter GetRootFrame()
     //{
     //    ContentPresenter rootFrame =null;
-    //    var windowContent = _window?.Content;
+    //    var windowContent = Window?.Content;
     //    if (windowContent is not MainPage rootPage)
     //    {
     //        rootPage = Services?.GetRequiredService<MainPage>() ?? new MainPage(Services.GetService<ILogger<MainPage>>());
