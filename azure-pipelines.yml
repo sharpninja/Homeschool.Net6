@@ -24,15 +24,7 @@ steps:
 - task: PowerShell@2
   displayName: dotnet restore
   inputs:
-    script: |
-      push-location
-      try{
-        dotnet restore Homeschool.Net6.sln --configfile Servers\nuget.config
-        set-location Servers
-        dotnet restore Servers.sln --configfile Servers\nuget.config
-      } finally {
-        pop-location
-      }
+    script: restore.ps1
 
 - task: VSBuild@1
   inputs:
