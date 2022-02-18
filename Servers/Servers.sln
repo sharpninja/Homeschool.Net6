@@ -1,22 +1,30 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30114.105
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32210.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Homeschool.Server", "Homeschool.Server\Homeschool.Server.csproj", "{13AEDBDF-C315-4186-837F-847706DC9F24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homeschool.Server", "Homeschool.Server\Homeschool.Server.csproj", "{13AEDBDF-C315-4186-837F-847706DC9F24}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{444B25C8-A8E6-4D12-9F94-86A8271F463A}"
+	ProjectSection(SolutionItems) = preProject
+		nuget.config = nuget.config
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{13AEDBDF-C315-4186-837F-847706DC9F24}.Debug|Any CPU.ActiveCfg = Debug|x64
 		{13AEDBDF-C315-4186-837F-847706DC9F24}.Debug|Any CPU.Build.0 = Debug|x64
 		{13AEDBDF-C315-4186-837F-847706DC9F24}.Release|Any CPU.ActiveCfg = Release|x64
 		{13AEDBDF-C315-4186-837F-847706DC9F24}.Release|Any CPU.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {13642D91-D4AE-40F2-90D4-F62894E24582}
 	EndGlobalSection
 EndGlobal
