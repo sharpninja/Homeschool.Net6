@@ -6,9 +6,8 @@
 trigger:
 - main
 
-pool:
-  vmImage: 'windows-latest'
-
+pool: Homeschool
+  
 variables:
   solution: 'C:\GitHub\Homeschool.Net6\Servers\Servers.sln'
   buildPlatform: 'x64'
