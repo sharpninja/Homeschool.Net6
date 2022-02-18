@@ -398,3 +398,4 @@ FodyWeavers.xsd
 *.sln.iml
 /Server/Homeschool.DataTests/appsettings.json
 /Services
+/Servers/appsettings.json
