@@ -11,7 +11,7 @@ pool: Homeschool
 variables:
   solution: 'C:\GitHub\Homeschool.Net6\Servers\Servers.sln'
   buildPlatform: 'x64'
-  buildConfiguration: 'Release'
+  buildConfiguration: 'Debug'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -29,7 +29,8 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+- task: PublishBuildArtifacts@1
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    PathtoPublish: '$(build.artifactStagingDirectory)'
+    ArtifactName: 'Server'
+    publishLocation: 'Container'
