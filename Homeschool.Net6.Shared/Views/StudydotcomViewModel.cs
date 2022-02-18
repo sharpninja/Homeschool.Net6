@@ -151,4 +151,6 @@ public partial class StudydotcomViewModel
     {
         NextLesson = LessonQueue.FirstOrDefault(l => l.MarkedCompleteDateTime is null);
     }
+
+    public bool CanMarkCompleted => NextLesson?.CanComplete ?? false;
 }

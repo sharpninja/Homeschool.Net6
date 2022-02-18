@@ -16,5 +16,8 @@
 
         [ OperationContract ]
         LessonModel? MarkLessonCompleted(Guid lessonUid, DateTimeOffset timestamp);
+
+        [ OperationContract ]
+        LessonModel? MarkLessonOpened(Guid lessonUid, DateTimeOffset timestamp);
     }
 }

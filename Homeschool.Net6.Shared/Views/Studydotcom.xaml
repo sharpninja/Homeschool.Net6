@@ -53,7 +53,7 @@
                 DataContext="{x:Bind ViewModel.NextLesson, Mode=OneWay}"
                 Visibility="{x:Bind ViewModel.NextLesson.Visibility, Converter={StaticResource VisibilityConverter}, Mode=OneWay}">
             <Button Command="{x:Bind ViewModel.MarkCompletedCommand}" Margin="4" Padding="8"
-                    Style="{ThemeResource AccentButtonStyle}">
+                    Style="{ThemeResource AccentButtonStyle}" IsEnabled="{x:Bind ViewModel.CanMarkCompleted}">
                 <StackPanel Orientation="Horizontal">
                     <FontIcon Glyph="&#xE73E;" />
                     <TextBlock>Mark Completed</TextBlock>

@@ -19,5 +19,6 @@ namespace Homeschool.Data
         public string lesson_title { get; set; }
         public string lesson_url { get; set; }
         public DateTime? lesson_marked_completed { get; set; }
+        public DateTime? lesson_last_opened { get; set; }
     }
 }

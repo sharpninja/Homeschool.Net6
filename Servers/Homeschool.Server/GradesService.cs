@@ -103,9 +103,7 @@ public class GradesService : IGradesService, IHostedService
 
     public LessonModel? MarkLessonCompleted(Guid lessonUid, DateTimeOffset timestamp)
     {
-        var hsLesson = Context
-            .HsLessons
-            .FirstOrDefault(l => l.LessUid == lessonUid);
+        var hsLesson = Context.HsLessons.FirstOrDefault(l => l.LessUid == lessonUid);
 
         if (hsLesson is null)
         {
@@ -113,6 +111,24 @@ public class GradesService : IGradesService, IHostedService
         }
 
         hsLesson.LessMarkedCompleted = timestamp.LocalDateTime;
+
+        Context.SaveChanges();
+
+        var result = new LessonModel(null, hsLesson);
+
+        return result;
+    }
+
+    public LessonModel? MarkLessonOpened(Guid lessonUid, DateTimeOffset timestamp)
+    {
+        var hsLesson = Context.HsLessons.FirstOrDefault(l => l.LessUid == lessonUid);
+
+        if (hsLesson is null)
+        {
+            return null;
+        }
+
+        hsLesson.LessLastOpened = timestamp.LocalDateTime;
 
         Context.SaveChanges();
 

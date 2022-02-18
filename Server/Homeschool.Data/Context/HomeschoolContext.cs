@@ -30,6 +30,7 @@ namespace Homeschool.Data.Context
             modelBuilder.ApplyConfiguration(new Configurations.HsLessonConfiguration());
             modelBuilder.ApplyConfiguration(new Configurations.HsSubjectConfiguration());
 
+            OnModelCreatingGeneratedProcedures(modelBuilder);
             OnModelCreatingPartial(modelBuilder);
         }
 

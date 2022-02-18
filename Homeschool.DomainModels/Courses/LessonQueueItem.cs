@@ -23,6 +23,7 @@ public partial class LessonQueueItem
         LessonUrl = item.lesson_url;
         CourseIcon = $"/Assets/{item.course_icon}";
         MarkedCompleteDateTime = item.lesson_marked_completed;
+        LastOpenedDateTime = item.lesson_last_opened;
         Index = index;
     }
 
@@ -60,10 +61,26 @@ public partial class LessonQueueItem
     AlsoNotifyChangeFor(nameof(Visibility))]
     protected DateTimeOffset? markedCompleteDateTime;
 
+    [ ObservableProperty, AlsoNotifyChangeFor(nameof(MarkedCompleteDateTimeFormatted)), ]
+    protected DateTimeOffset? lastOpenedDateTime;
+
     public string MarkedCompleteDateTimeFormatted
         => $"{markedCompleteDateTime?.DateTime.ToLongTimeString()}";
 
-    public bool Visibility => courseUid != Guid.Empty &&
+    public string LastOpenedDateTimeFormatted
+        => $"{lastOpenedDateTime?.DateTime.ToLongTimeString()}";
+
+    public bool Visibility => (courseUid != Guid.Empty) &&
                               (markedCompleteDateTime is null ||
-                              markedCompleteDateTime == DateTimeOffset.MinValue);
+                               (markedCompleteDateTime == DateTimeOffset.MinValue));
+
+    public bool CanComplete => (courseUid != Guid.Empty) &&
+                              (lastOpenedDateTime is not null &&
+                               (lastOpenedDateTime > TryParseDateTimeOffset("1900/1/1") &&
+                                DateTimeOffset.Now - lastOpenedDateTime > TimeSpan.FromSeconds(60)));
+
+    private DateTimeOffset TryParseDateTimeOffset(string dateString)
+        => DateTimeOffset.TryParse("1900/1/1", out var date)
+            ? date
+            : DateTimeOffset.MinValue;
 }

@@ -31,6 +31,11 @@ namespace Homeschool.Data.Context
         {
             return Procedures;
         }
+
+        protected void OnModelCreatingGeneratedProcedures(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<HsLessonQueue>().HasNoKey().ToView(null);
+        }
     }
 
     public interface IHomeschoolContextProceduresContract
