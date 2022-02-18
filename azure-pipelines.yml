@@ -22,9 +22,9 @@ steps:
     feedsToUse: config
     nugetConfigPath: 'Servers\nuget.config'
 - task: PowerShell@2
-  displayName: dotnet restore
   inputs:
-    script: restore.ps1
+    filePath: 'restore.ps1'
+    showWarnings: true
 
 - task: VSBuild@1
   inputs:
