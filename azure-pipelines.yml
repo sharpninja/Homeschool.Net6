@@ -22,6 +22,8 @@ steps:
     feedsToUse: config
     nugetConfigPath: 'Servers\nuget.config'
 - task: PowerShell@2
+  env:
+    outdir: $(build.artifactStagingDirectory)
   inputs:
     filePath: 'restore.ps1'
     showWarnings: true
