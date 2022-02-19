@@ -9,7 +9,7 @@ try {
     Pop-Location
     Set-Location Servers
     dotnet build Servers.sln --no-restore -c Debug
-    dotnet publish Servers.sln --no-build -c Debug -a x64 -o "$(build.artifactStagingDirectory)"
+    dotnet publish Servers.sln --no-build -c Debug -a x64 -o "${env:outdir}"
 }
 finally {
     Pop-Location
