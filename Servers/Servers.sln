@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{444B25C8-A8E6-4D12-9F94-86A8271F463A}"
 	ProjectSection(SolutionItems) = preProject
 		nuget.config = nuget.config
+		..\restore.ps1 = ..\restore.ps1
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homeschool.Data", "..\Server\Homeschool.Data\Homeschool.Data.csproj", "{FF4227E8-DF77-4E74-8642-12BEA00FB44C}"

@@ -8,9 +8,9 @@ try {
 
     # Pop-Location
     Set-Location Servers
-    dotnet restore Servers.sln -c Debug --configfile "$config"
-    dotnet build Servers.sln --no-restore -c Debug
-    dotnet publish Servers.sln --no-build -c Debug -a x64 -o "${env:outdir}"
+    dotnet restore Servers.sln --configfile "$config"
+    Set-Location Homeschool.Server
+    dotnet publish Homeschool.Server.csproj --configuration Debug --arch x64 --output "${env:outdir}"
 }
 finally {
     Pop-Location

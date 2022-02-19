@@ -6,7 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Platforms>x64</Platforms>
         <UserSecretsId>038bee81-89cb-4223-be47-887ab5355b96</UserSecretsId>
-      <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+        <RuntimeIdentifier>win-x64</RuntimeIdentifier>
     </PropertyGroup>
 
     <ItemGroup>

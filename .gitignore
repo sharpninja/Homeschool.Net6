@@ -399,3 +399,7 @@ FodyWeavers.xsd
 /Server/Homeschool.DataTests/appsettings.json
 /Services
 /Servers/appsettings.json
+/Servers/Services
+/Servers/Homeschool.Server/Services
+/Server/Homeschool.Data/Services
+/Homeschool.DomainModels/Services
