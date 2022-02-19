@@ -10,6 +10,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		nuget.config = nuget.config
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homeschool.Data", "..\Server\Homeschool.Data\Homeschool.Data.csproj", "{FF4227E8-DF77-4E74-8642-12BEA00FB44C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Homeschool.DomainModels", "..\Homeschool.DomainModels\Homeschool.DomainModels.csproj", "{D279CD43-EE18-4812-9FE4-BDBDBC1F257D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +30,22 @@ Global
 		{13AEDBDF-C315-4186-837F-847706DC9F24}.Release|Any CPU.Build.0 = Release|x64
 		{13AEDBDF-C315-4186-837F-847706DC9F24}.Release|x64.ActiveCfg = Release|x64
 		{13AEDBDF-C315-4186-837F-847706DC9F24}.Release|x64.Build.0 = Release|x64
+		{FF4227E8-DF77-4E74-8642-12BEA00FB44C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF4227E8-DF77-4E74-8642-12BEA00FB44C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF4227E8-DF77-4E74-8642-12BEA00FB44C}.Debug|x64.ActiveCfg = Debug|x64
+		{FF4227E8-DF77-4E74-8642-12BEA00FB44C}.Debug|x64.Build.0 = Debug|x64
+		{FF4227E8-DF77-4E74-8642-12BEA00FB44C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF4227E8-DF77-4E74-8642-12BEA00FB44C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF4227E8-DF77-4E74-8642-12BEA00FB44C}.Release|x64.ActiveCfg = Release|x64
+		{FF4227E8-DF77-4E74-8642-12BEA00FB44C}.Release|x64.Build.0 = Release|x64
+		{D279CD43-EE18-4812-9FE4-BDBDBC1F257D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D279CD43-EE18-4812-9FE4-BDBDBC1F257D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D279CD43-EE18-4812-9FE4-BDBDBC1F257D}.Debug|x64.ActiveCfg = Debug|x64
+		{D279CD43-EE18-4812-9FE4-BDBDBC1F257D}.Debug|x64.Build.0 = Debug|x64
+		{D279CD43-EE18-4812-9FE4-BDBDBC1F257D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D279CD43-EE18-4812-9FE4-BDBDBC1F257D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D279CD43-EE18-4812-9FE4-BDBDBC1F257D}.Release|x64.ActiveCfg = Release|x64
+		{D279CD43-EE18-4812-9FE4-BDBDBC1F257D}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
