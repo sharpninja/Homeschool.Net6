@@ -2,12 +2,18 @@ namespace Homeschool.App.Helper;
 
 using CommunityToolkit.Mvvm.ComponentModel;
 
+using Newtonsoft.Json;
+
 [ObservableObject]
 public partial class SettingsViewModel
 {
-    [ObservableProperty]
-    private bool _isScreenshotMode;
+    [ ObservableProperty, JsonProperty ]
+    public string _maxLessons = "6";
 
+    [ObservableProperty, JsonProperty ]
+    public bool _isScreenshotMode;
+
+    [JsonConstructor]
     public SettingsViewModel()
     {
         try
@@ -20,10 +26,19 @@ public partial class SettingsViewModel
         }
     }
 
+    [ICommand]
+    private void SetMaxLessons(string maxLessons)
+    {
+        MaxLessons = maxLessons;
+    }
+
+    [ JsonIgnore ]
     private StorageFolder? _screenshotStorageFolder;
 
+    [JsonIgnore]
     public StorageFolder ScreenshotStorageFolder => _screenshotStorageFolder;
 
+    [JsonProperty]
     public string ScreenshotStorageFolderPath
     {
         get => _screenshotStorageFolder.Path;

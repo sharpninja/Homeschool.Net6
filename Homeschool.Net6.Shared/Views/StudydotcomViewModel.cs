@@ -1,13 +1,6 @@
 ﻿namespace Homeschool.App.Views;
 
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-
 using DomainModels.Courses;
-
-using Proxy;
-
-using System.Reflection;
 
 [ObservableObject]
 public partial class StudydotcomViewModel
@@ -17,9 +10,29 @@ public partial class StudydotcomViewModel
         get;
     }
 
-    public WcfProxy WcfProxy
+    public Lambdas Proxy
     {
         get;
+    }
+
+    public SettingsViewModel Settings
+    {
+        get;
+    }
+
+    public void MarkOpened()
+    {
+        var task = Task.Run(
+            async () =>
+            {
+                var lessons = await Proxy.MarkLessonOpened(
+                        NextLesson.LessonUid,
+                        DateTimeOffset.Now,
+                        Logger
+                    );
+            }
+        );
+        task.Wait();
     }
 
     [ObservableProperty]
@@ -37,10 +50,14 @@ public partial class StudydotcomViewModel
         MarkedCompleteDateTime = DateTimeOffset.MinValue
     };
 
-    public StudydotcomViewModel(ILogger<StudydotcomViewModel> logger, WcfProxy wcfProxy)
+    public StudydotcomViewModel(
+        ILogger<StudydotcomViewModel> logger,
+        Lambdas proxy,
+        SettingsViewModel settings)
     {
         Logger = logger;
-        WcfProxy = wcfProxy;
+        Proxy = proxy;
+        Settings = settings;
     }
 
     [ICommand]
@@ -56,9 +73,10 @@ public partial class StudydotcomViewModel
         NextLesson.MarkedCompleteDateTime = DateTimeOffset.Now;
 
 
-        var result = WcfProxy.MarkLessonCompleted(
+        var result = Proxy.MarkLessonCompleted(
             NextLesson.LessonUid,
-            NextLesson.MarkedCompleteDateTime.Value
+            NextLesson.MarkedCompleteDateTime.Value,
+            Logger
         ).GetAwaiter().GetResult();
 
         //if (Debugger.IsAttached)
@@ -95,11 +113,14 @@ public partial class StudydotcomViewModel
         //{
         //    Debugger.Break();
         //}
-        Task<LessonQueueItem[]?> GetLessonQueueAsync()
+        Task<LessonQueueItem[]> GetLessonQueueAsync()
         {
             try
             {
-                Task<LessonQueueItem[]?> result = WcfProxy.GetLessonQueueAsync();
+                Task<LessonQueueItem[]> result = //Proxy.GetLessonQueueAsync();
+                    Proxy.GetQueue(Logger,
+                        int.Parse(Settings.MaxLessons),
+                        int.Parse(Settings.MaxLessons));
 
                 return result;
             }
@@ -111,9 +132,9 @@ public partial class StudydotcomViewModel
 
         try
         {
-            LessonQueueItem[]? results = await GetLessonQueueAsync();
+            LessonQueueItem[] results = await GetLessonQueueAsync();
 
-            if (results is null
+            if (results?.ToArray() is null
                 or
                 {
                     Length: 0

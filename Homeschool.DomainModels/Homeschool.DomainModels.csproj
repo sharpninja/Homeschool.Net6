@@ -16,8 +16,4 @@
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0-preview1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Server\Homeschool.Data\Homeschool.Data.csproj" />
-  </ItemGroup>
-
 </Project>

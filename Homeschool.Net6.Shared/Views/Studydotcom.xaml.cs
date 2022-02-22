@@ -29,12 +29,12 @@ public sealed partial class Studydotcom : Page
 
     public void TodaysWork_Click(object sender, RoutedEventArgs args)
     {
-        ViewModel.LoadLessonQueueAsync().GetAwaiter().GetResult();
+        ViewModel.LoadLessonQueueAsync();
     }
 
     private void Hyperlink_Click(Microsoft.UI.Xaml.Documents.Hyperlink sender, Microsoft.UI.Xaml.Documents.HyperlinkClickEventArgs args)
     {
-
+        ViewModel.MarkOpened();
     }
 }
 

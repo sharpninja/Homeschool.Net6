@@ -33,6 +33,7 @@
         <AppxBundlePlatforms>x64</AppxBundlePlatforms>
         <AppInstallerUri>\\JBOO-DESKTOP\Homeschool\updates</AppInstallerUri>
         <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+        <UserSecretsId>d4c0a948-02bf-4eea-bf57-05a501dec987</UserSecretsId>
     </PropertyGroup>
     <ItemGroup>
         <Compile Remove="BrowserControl\BrowserControlWebView2.xaml.cs" />
@@ -123,7 +124,9 @@
         <PackageReference Include="CommunityToolkit.Extensions.Hosting.WindowsAppSdk" Version="1.0.1" />
         <PackageReference Include="CommunityToolkit.Mvvm" Version="8.0.0-preview1" />
         <PackageReference Include="CommunityToolkit.WinUI.UI.Controls" Version="7.1.2" />
-        <PackageReference Include="Microsoft.Windows.CsWinRT" Version="1.4.1" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="6.0.1" />
+        <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
+        <PackageReference Include="Microsoft.Windows.CsWinRT" Version="1.5.0" />
         <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.0.0" />
         <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.197" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
@@ -240,7 +243,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Client\Homeschool.Proxy\Homeschool.Proxy.csproj" />
-      <ProjectReference Include="..\Homeschool.DomainModels\Homeschool.DomainModels.csproj" />
+      <ProjectReference Include="..\..\Homeschool.Aws\Homeschool.Aws\Homeschool.DomainModels\Homeschool.DomainModels.csproj" />
+      <ProjectReference Include="..\Server\Homeschool.Aws.Client\Homeschool.Aws.Client.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <SourceGeneratorInput Remove="PathName.cs" />
     </ItemGroup>
 </Project>

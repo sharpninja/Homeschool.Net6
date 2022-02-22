@@ -1,5 +1,11 @@
 ﻿namespace Homeschool.Net6;
 
+using Aws.Client;
+
+using CommunityToolkit.WinUI.Helpers;
+
+using Newtonsoft.Json;
+
 using App = Homeschool.App.App;
 
 public static class Program
@@ -14,11 +20,12 @@ public static class Program
             (context, configurationBuilder) =>
             {
                 configurationBuilder.AddJsonFile("appsettings.json", false);
-                configurationBuilder.AddJsonFile(
-                    WcfSettings.GetSettingsFilename(
-                        Windows.Storage.ApplicationData.Current.LocalFolder.Path),
-                    true);
+                //configurationBuilder.AddJsonFile(
+                //    WcfSettings.GetSettingsFilename(
+                //        Windows.Storage.ApplicationData.Current.LocalFolder.Path),
+                //    true);
                 configurationBuilder.AddUserSecrets(typeof(MainPage).Assembly, true);
+                configurationBuilder.AddEnvironmentVariables();
             }
         );
         builder.ConfigureServices(
@@ -33,7 +40,6 @@ public static class Program
                 );
                 // If your main Window is named differently, change it here.
                 collection
-                    .AddSingleton<HomeschoolClientLogic>()
                     .AddSingleton<PathName>(
                         provider => new(Windows.Storage.ApplicationData.Current.LocalFolder.Path)
                     )
@@ -67,14 +73,43 @@ public static class Program
                             return new MainWindow(provider.GetRequiredService<MainPage>());
                         }
                     )
-                    .AddTransient<HomeschoolClientLogic>()
-                    .AddTransient<WcfProxy>()
-                    .AddTransient<WcfSettings>()
                     .AddSingleton<ResearchPage>()
-                    .AddSingleton<SettingsViewModel>()
+                    .AddSingleton<SettingsViewModel>(
+                        provider =>
+                        {
+                            if (!ApplicationData.Current.LocalFolder
+                                    .FileExistsAsync("settings.json")
+                                    .GetAwaiter()
+                                    .GetResult())
+                            {
+                                return new SettingsViewModel();
+                            }
+
+                            var jsonStream = ApplicationData.Current.LocalFolder
+                                .OpenStreamForReadAsync("settings.json")
+                                .GetAwaiter()
+                                .GetResult();
+
+                            var buffer = new byte[jsonStream.Length];
+                            int read = jsonStream.Read(buffer, 0, buffer.Length);
+                            jsonStream.Close();
+
+                            var json = Encoding.UTF8.GetString(buffer);
+
+                            if (json is not (null or ""))
+                            {
+                                return JsonConvert.DeserializeObject<SettingsViewModel>(
+                                    json,
+                                    MainPage.JsonOptions!
+                                );
+                            }
+
+                            return new SettingsViewModel();
+                        })
                     .AddSingleton<SettingsPage>()
                     .AddSingleton<HomePage>()
                     .AddSingleton<MainViewModel>()
+                    .AddTransient<Lambdas>()
                     .AddSingleton<Studydotcom>(
                         provider =>
                         {

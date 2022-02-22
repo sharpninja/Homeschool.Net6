@@ -39,6 +39,21 @@
                 <TextBlock
                     Style="{StaticResource SubtitleTextBlockStyle}"
                     Margin="0,12,0,0"
+                    Text="Lessons Per Day" />
+                <StackPanel x:Name="Lessonspanel" Margin="0,10,0,0">
+                    <TextBox x:Name="txtLessonsPerDay" Text="{x:Bind ViewModel.MaxLessons, Mode=OneWay}"/>
+                    <Button Command="{x:Bind ViewModel.SetMaxLessonsCommand}"
+                            CommandParameter="{Binding ElementName=txtLessonsPerDay, Path=Text}">
+                        <StackPanel Orientation="Horizontal">
+                            <FontIcon Glyph="&#xE74E;" />
+                            <TextBlock>Set Lessons Per Day</TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+                <TextBlock
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Margin="0,12,0,0"
                     Text="Theme Mode" />
                 <StackPanel x:Name="ThemePanel" Margin="0,10,0,0">
                     <RadioButton Tag="Light" Checked="OnThemeRadioButtonChecked" Content="Light" KeyDown="OnThemeRadioButtonKeyDown" />

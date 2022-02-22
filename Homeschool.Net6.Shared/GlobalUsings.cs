@@ -38,7 +38,7 @@ global using Microsoft.UI.Xaml.Hosting;
 
 global using Homeschool.App.Views;
 
-global using WinRT;
+global using Homeschool.Aws.Client;
 
 global using Homeschool.App.Controls;
 
@@ -52,3 +52,11 @@ global using System.Collections.Concurrent;
 global using Windows.Storage;
 global using Windows.Storage.Pickers;
 global using Windows.UI.ViewManagement;
+
+global using CommunityToolkit.Mvvm.ComponentModel;
+global using CommunityToolkit.Mvvm.Input;
+
+global using System.Reflection;
+
+
+

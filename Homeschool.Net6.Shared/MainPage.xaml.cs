@@ -1,7 +1,5 @@
 ﻿namespace Homeschool.App;
 
-using CommunityToolkit.Mvvm.ComponentModel;
-
 using Newtonsoft.Json;
 
 public sealed partial class MainPage : Page
@@ -44,7 +42,7 @@ public sealed partial class MainPage : Page
     {
     }
 
-    private Newtonsoft.Json.JsonSerializerSettings Options { get; } = new()
+    internal static JsonSerializerSettings JsonOptions { get; } = new()
     {
         MaxDepth = 2,
         Formatting = Formatting.Indented,
@@ -58,7 +56,7 @@ public sealed partial class MainPage : Page
     {
         Logger.LogInformation($"NavItem_Invoked: Entered.");
 
-        //var json = JsonConvert.SerializeObject(args, Options);
+        //var json = JsonConvert.SerializeObject(args, JsonOptions);
 
         //Logger.LogInformation($"args:\n{json}");
 
@@ -91,19 +89,4 @@ public sealed partial class MainPage : Page
         //    this.As<Page>().TopAppBar = header;
         //}
     }
-}
-
-[ObservableObject]
-public partial class MainViewModel
-{
-    private static MainViewModel? _instance = null;
-
-    [ObservableProperty]
-    protected string? status;
-
-    public MainViewModel()
-        => _instance = this;
-
-    public static void SetStatus(string newStatus)
-        => _instance!.Status = $"{DateTime.Now:t}: {newStatus}";
 }
